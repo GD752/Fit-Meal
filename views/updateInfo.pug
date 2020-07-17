@@ -1,0 +1,19 @@
+extends base
+block content
+  h2 User Page
+  .profile-container
+    h3
+      p 
+        img(src=`${user.profileImage}`)  
+        input(type="file", name="").updateProfile
+      form.updateMyInfo
+        .entry
+          .entry-text Email
+          input(type='email', name='email', value=`${user.email}`)
+        .entry
+          .entry-text Name
+          input(type='text', name='name', value=`${user.name}`)
+        .btn-parent
+          button.btn.btn-primary(type='submit') Update Info
+  
+

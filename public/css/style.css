@@ -408,4 +408,7 @@ footer {
 
 .imgdiv{
   padding-bottom: 3.5vh;
+  display: flex;
+  justify-content:center;
 }
+

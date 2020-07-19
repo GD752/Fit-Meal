@@ -18,7 +18,7 @@ async function loginHelper(email, password) {
     alert("Login Successfull")
     location.assign("/profilePage");
   } else {
-    alert("Try again");
+    alert("User ID or password is incorrect!");
   }
 }
 
@@ -26,6 +26,22 @@ async function signupHelper(email, password, confirmPassword, name) {
   const response = await axios.post("/api/users/signup", {
     email, password, confirmPassword, name
   });
+  if(response.data.status=="user signed up") {
+    alert("Your are signed up");
+    user =response.data.user;
+    const {email,password}=user;
+    const resp = await axios.post("/api/users/login", {
+     email, password
+    })
+    if (resp.data.status == "successfull") {
+      location.assign("/profilePage");
+    }
+    else{
+      alert("please log in with credidentials")
+    }
+  } else {
+    alert("something went wrong")
+  }
   console.log(response.data);
 }
 async function logoutHelper() {
@@ -141,7 +157,7 @@ if (updateMyInfo){
     if(email&&name)
       updateInfoHelper(email,name)
     else
-      console.log("undefined email and name")
+      console.log("undefined email or name")
   })
 
 }

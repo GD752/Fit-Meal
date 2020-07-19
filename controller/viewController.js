@@ -1,5 +1,6 @@
 // 1
 let planModel = require("../model/planModel");
+let userModel = require("../model/userModel");
 function getTestPage(req, res) {
   res.render("test.pug", {
     title: "Test Page"
@@ -16,6 +17,19 @@ async function getPlansListing(req, res) {
     user
   })
 }
+
+async function getUsersListing(req, res) {
+  // 2
+  const user = req.user;
+  const users = await userModel.find();
+  res.render("usersListing.pug", {
+    title: "Users page",
+    // 3
+    users: users,
+    user
+  })
+}
+
 async function getLoginPage(req, res) {
   const user = req.user;
   console.log(req.user);
@@ -24,6 +38,16 @@ async function getLoginPage(req, res) {
     user
   })
 }
+
+async function getSignupPage(req, res) {
+  const user = req.user;
+  console.log(req.user);
+  res.render("signup.pug", {
+    title: "Signup Page",
+    user
+  })
+}
+
 async function getHomePage(req, res) {
   const user = req.user;
   res.render("Home.pug", {
@@ -60,7 +84,9 @@ async function getSomethingWentWrong(req, res) {
 }
 module.exports.getTestPage = getTestPage;
 module.exports.getPlansListing = getPlansListing;
+module.exports.getUsersListing = getUsersListing;
 module.exports.getLoginPage = getLoginPage;
+module.exports.getSignupPage = getSignupPage;
 module.exports.getHomePage = getHomePage;
 module.exports.getProfilePage = getProfilePage;
 module.exports.getUpdateInfo = getUpdateInfo;

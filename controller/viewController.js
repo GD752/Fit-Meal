@@ -69,6 +69,19 @@ async function getUpdateInfo(req, res) {
     user
   })
 }
+
+async function getUpdateUser(req, res) {
+  console.log("Getupdate user")
+  const user=req.user;
+  const id=req.params.id;
+  const user1 =await userModel.findById(id);
+  res.render("updateUser.pug", {
+    title: "Update User",
+    user,
+    user1
+  })
+}
+
 async function getForgetPasswordPage(req, res) {
   res.render("forgetPassword.pug", {
     title: "ForgetPassword",
@@ -90,6 +103,7 @@ module.exports.getSignupPage = getSignupPage;
 module.exports.getHomePage = getHomePage;
 module.exports.getProfilePage = getProfilePage;
 module.exports.getUpdateInfo = getUpdateInfo;
+module.exports.getUpdateUser = getUpdateUser;
 module.exports.getForgetPasswordPage = getForgetPasswordPage;
 module.exports.getResetPage = getResetPage;
 module.exports.getSomethingWentWrong = getSomethingWentWrong;

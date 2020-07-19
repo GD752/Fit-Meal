@@ -10,6 +10,7 @@ app.use(express.json());
 // 
 app.use(express.static("public"));
 app.use('/resetPassword/:token',express.static("public"));
+app.use('/updateUser/:id',express.static("public"));
 // templating engine
 app.set("view engine", "pug");
 // templates address

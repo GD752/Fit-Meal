@@ -1,8 +1,8 @@
 const express = require("express")
 const userRouter = express.Router();
-const { getAllUsers, createUser, updateProfileHandler, updateInfo } = require("../controller/userController");
+const { getAllUsers, createUser, updateProfileHandler, updateInfo, updateUser } = require("../controller/userController");
 const { getMe } = require("../controller/userController");
-const { signup, login, protectRoute, isAuthorized, forgetPassword, resetPassword, logout, } = require("../controller/authController");
+const { signup, login, protectRoute, isAuthorized, forgetPassword, resetPassword, logout, isAdmin, } = require("../controller/authController");
 const multer = require("multer");
 const multerstorage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -34,6 +34,7 @@ userRouter.post("/signup", signup)
 userRouter.post("/login", login)
 userRouter.get("/profilePage", protectRoute, getMe);
 userRouter.patch("/updateInfo", protectRoute,updateInfo);
+userRouter.patch("/updateUser/:id", isAdmin,updateUser);
 userRouter.patch("/forgetPassword", forgetPassword)
 userRouter.patch("/resetPassword/:token", resetPassword);
 userRouter.get("/logout", logout);
@@ -47,7 +48,7 @@ userRouter.get("/logout", logout);
 //   .delete(removeUser)
 // admin
 userRouter.use(protectRoute, isAuthorized(["admin"]));
-userRouter.route("").
-  get(getAllUsers)
-  .post(createUser);
+// userRouter.route("").
+//   get(getAllUsers)
+//   .post(createUser);
 module.exports = userRouter;

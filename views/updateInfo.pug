@@ -4,15 +4,16 @@ block content
   .profile-container
     h3
       p 
-        img(src=`${user.profileImage}`)  
+        .imgdiv
+          img(src=`${user.profileImage}`,class="profileimg")  
         input(type="file", name="").updateProfile
       form.updateMyInfo
         .entry
-          .entry-text Email
-          input(type='email', name='email', value=`${user.email}`)
-        .entry
           .entry-text Name
           input(type='text', name='name', value=`${user.name}`)
+        .entry
+          .entry-text Email
+          input(type='email', name='email', value=`${user.email}`)
         .btn-parent
           button.btn.btn-primary(type='submit') Update Info
   

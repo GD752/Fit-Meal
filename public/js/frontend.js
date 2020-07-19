@@ -6,6 +6,7 @@ let logoutBtn = d.querySelector(".logout");
 let forgetForm = d.querySelector(".forgetPassword");
 let resetPasswordForm = d.querySelector(".resetPassword");
 let updateMyInfo=d.querySelector(".updateMyInfo")
+let updateUserInfo=d.querySelector(".updateUserInfo")
 
 let updateProfile = d.querySelector(".updateProfile");
 
@@ -160,4 +161,29 @@ if (updateMyInfo){
       console.log("undefined email or name")
   })
 
+}
+async function updateUserHelper(email,name,role,id){
+  console.log("Frontend update user helper")
+  const response = await axios.patch(`/api/users/updateUser/${id}`, { email,name,role });
+  if (response.data.success) {
+    alert("information updated")
+    location.reload();
+  }else{
+    alert("something went wrong");
+  }
+}
+
+if (updateUserInfo){
+  console.log("Frontend update user")
+  updateUserInfo.addEventListener("submit",function(e){
+    e.preventDefault();
+    let email=d.querySelector("[name=email1]").value
+    let name=d.querySelector("[name=name1]").value
+    let role=d.querySelector("[name=role1]").value
+    let id=d.querySelector("[name=name1]").getAttribute('uid')
+    if(email&&name&&role)
+      updateUserHelper(email,name,role,id)
+    else
+      console.log("undefined email or name")
+  })
 }

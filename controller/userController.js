@@ -104,11 +104,39 @@ async function updateInfo(req,res){
   }
 }
 
+async function updateUser(req,res){
+  console.log("controller update user")
+  try {
+    const {id} = req.params;
+    const user = await userModel.findById(id);
+    const {email,name,role}=req.body;
+    user.name=name;
+    user.email=email;
+    user.role=role;
+    await user.save({
+      validateBeforeSave: false
+    })
+    //  user profile Image link update
+    // process update public folder 
+    //db link update 
+    // console.log(user);
+    res.status(200).json({
+      success: "updated info"
+    })
+  } catch (err) {
+    console.log(err);
+    res.status(200).json({
+      status: "something went wrong"
+    })
+  }
+}
+
 module.exports.getAllUsers = getAllUsers;
 // module.exports.getUser=getUser;
 module.exports.createUser = createUser;
 module.exports.updateInfo=updateInfo;
 // module.exports.removeUser=removeUser;
 module.exports.updateProfileHandler = updateProfileHandler;
+module.exports.updateUser=updateUser;
 
 module.exports.getMe = getMe;

@@ -1,6 +1,6 @@
 const express = require("express")
 const userRouter = express.Router();
-const { getAllUsers, createUser, updateProfileHandler, updateInfo, updateUser } = require("../controller/userController");
+const { getAllUsers, createUser, updateProfileHandler,updateProfileHandler2, updateInfo, updateUser,removeUser } = require("../controller/userController");
 const { getMe } = require("../controller/userController");
 const { signup, login, protectRoute, isAuthorized, forgetPassword, resetPassword, logout, isAdmin, } = require("../controller/authController");
 const multer = require("multer");
@@ -28,6 +28,8 @@ const upload = multer({
 //  destination ,fileName
 //  request => loggedin=> id => user => profileImage link update 
 userRouter.patch("/updateProfile" , protectRoute,upload.single("user"),updateProfileHandler)
+userRouter.patch(`/updateProfile/:id` , protectRoute,upload.single("user"),updateProfileHandler2)
+
 
 // signup
 userRouter.post("/signup", signup)
@@ -38,6 +40,7 @@ userRouter.patch("/updateUser/:id", isAdmin,updateUser);
 userRouter.patch("/forgetPassword", forgetPassword)
 userRouter.patch("/resetPassword/:token", resetPassword);
 userRouter.get("/logout", logout);
+userRouter.delete("/delete/:id", removeUser);
 // login 
 // forgetPassword
 //resetPassword

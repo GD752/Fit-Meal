@@ -9,6 +9,8 @@ let updateMyInfo=d.querySelector(".updateMyInfo")
 let updateUserInfo=d.querySelector(".updateUserInfo")
 
 let updateProfile = d.querySelector(".updateProfile");
+let updateProfile2 = d.querySelector(".updateProfile2");
+let delUser=d.querySelectorAll(".delicon")
 
 async function loginHelper(email, password) {
   const response = await axios.post("/api/users/login", {
@@ -174,16 +176,61 @@ async function updateUserHelper(email,name,role,id){
 }
 
 if (updateUserInfo){
-  console.log("Frontend update user")
+  let id=d.querySelector("[name=name1]").getAttribute('uid')
   updateUserInfo.addEventListener("submit",function(e){
     e.preventDefault();
     let email=d.querySelector("[name=email1]").value
     let name=d.querySelector("[name=name1]").value
     let role=d.querySelector("[name=role1]").value
-    let id=d.querySelector("[name=name1]").getAttribute('uid')
     if(email&&name&&role)
       updateUserHelper(email,name,role,id)
     else
       console.log("undefined email or name")
   })
+  async function updateProfileHelper2(formData,id) {
+    let response = await axios.patch(`/api/users/updateProfile/${id}`, formData);
+    if (response.data.success) {
+      alert("profile Image uploaded")
+      location.reload();
+    }else{
+      alert("something went wrong");
+    }
+  }
+  //  image backend 
+  if (updateProfile2) {
+    updateProfile2.addEventListener("change", function (e) {
+      e.preventDefault();
+      // multipart data send 
+      // Browser
+      const formData = new FormData();
+      formData.append("user", updateProfile2.files[0]);
+      updateProfileHelper2(formData,id);
+    })
+  }
+}
+async function delUserHelper(id){
+  let response=await axios.delete(`/api/users/delete/${id}`)
+  if (response.data.success) {
+    alert("User Deleted")
+    location.reload();
+  }else{
+    alert("something went wrong");
+  }
+}
+if (delUser){
+  console.log(delUser)
+  Object.keys(delUser).forEach(function(key){
+    const id=delUser[key].getAttribute('uid');
+    console.log("In deluser")
+    delUser[key].addEventListener("click",function(e){
+      e.preventDefault();
+      console.log("In click event listener")
+      if (confirm("Are you sure you want to delete this user?")) {
+        delUserHelper(id);
+      } else {
+        txt = "Not Deleted User";
+      }
+  })
+  })
+  
 }

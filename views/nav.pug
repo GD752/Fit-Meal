@@ -3,11 +3,11 @@ nav.sticky(style="position:relative;")
     li.nav-line
       a.white-anchors(href='/') FEATURES
     li.nav-line
-      a.white-anchors(href='/') DETAILS
-    li.nav-line
-      a.white-anchors(href='') REVIEWS
+      a.white-anchors(href='/') ABOUT US
     li.nav-line
       a.white-anchors(href='/plans') PLANS
+    li.nav-line
+      a.white-anchors(href='#') CONTACT US
     if user
         li.nav-line
           a.white-anchors(href='/profilePage') #{user.name}
@@ -16,3 +16,9 @@ nav.sticky(style="position:relative;")
     else
         li.nav-line
           a.white-anchors(href='/login') LOGIN
+    li.nav-line
+      .onoffswitch
+        input#myonoffswitch.onoffswitch-checkbox(type='checkbox', name='onoffswitch', tabindex='0', checked='')
+        label.onoffswitch-label(for='myonoffswitch')
+          span.onoffswitch-inner
+          span.onoffswitch-switch

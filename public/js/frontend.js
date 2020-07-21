@@ -227,10 +227,8 @@ if (delUser){
       console.log("In click event listener")
       if (confirm("Are you sure you want to delete this user?")) {
         delUserHelper(id);
-      } else {
-        txt = "Not Deleted User";
       }
-  })
+    })
   })
   
 }

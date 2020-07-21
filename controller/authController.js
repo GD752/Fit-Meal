@@ -193,7 +193,7 @@ async function forgetPassword(req, res) {
       <p>${resetPasswordLink}</p>
       `;
       emailOptions.to = email;
-      emailOptions.from = "pepcodingdev@gmail.com";
+      emailOptions.from = "appgdev@gmail.com";
       emailOptions.subject = "Reset Password Link"
       await Email(emailOptions);
       res.status(200).json({

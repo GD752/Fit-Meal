@@ -1,27 +1,4 @@
 /*Presets  */
-:root {
-  --primary-color: gray;
-  --secondary-color: rgb(238, 238, 238);
-  --font-color: black;
-  --font2-color: rgb(10, 10, 10);
-  --bg-color: #fff;
-  --bg1-color: #f4f4f4;
-  --bg2-color:rgb(244,244,244);
-  --nav-color:white;
-  --shad-color:rgba(27, 38, 49, 0.1);
-}
-[data-theme="dark"] {
-  --primary-color: rgb(221, 221, 221);
-  --secondary-color: rgb(44,44,44);
-  --font-color: white;
-  --font2-color: rgb(247, 247, 247);
-  --bg-color: #212529;
-  --bg1-color: #1f2020;
-  --bg2-color:rgb(10,10,10);
-  --nav-color:black;
-  --heading-color: #818cab;
-  --shad-color:rgba(172, 175, 179, 0.1);
-}
 * {
   margin: 0;
   padding: 0;
@@ -30,8 +7,7 @@
 }
 body {
   font-size: 1rem;
-  color: var(--primary-color);
-  background-color:var(--bg-color);
+  color: gray;
 }
 /* presets */
 section {
@@ -138,8 +114,7 @@ header,
   margin-bottom: 3rem;
   padding: 2rem 1.5rem;
   margin-right: 1.5rem;
-  box-shadow: 0 10px 22px 10px var(--shad-color);
-  transition: box-shadow 0.3s ease-in-out;
+  box-shadow: 0 10px 22px 10px rgba(27, 38, 49, 0.1);
   width:30%;
   transition: transform 0.4s;
 }
@@ -175,8 +150,7 @@ h3 {
   line-height: 145%;
 }
 .How-to {
- background-color: var(--bg2-color);
- transition: background-color 0.3s ease-in-out;
+ background-color:  rgb(244, 244, 244);
 }
 .howto-container {
   display: flex;
@@ -242,10 +216,9 @@ cite {
   margin-top: 1rem;
 }
 .sticky {
-  background-color:var(--nav-color);
+  background-color: white;
   width: 100%;
   padding-bottom: 1rem;
-  transition: background-color 0.3s ease-in-out;
 
   position: fixed;
   z-index: 100;
@@ -253,7 +226,7 @@ cite {
 }
 /* Specificity */
 .sticky .white-anchors {
-  color:var(--font-color);
+  color: black;
 }
 
 .comments-container {
@@ -281,8 +254,7 @@ cite {
 /* Plans
  */
 .signup {
-  background-color: var(--bg1-color);
-  transition: background-color 0.3s ease-in-out;
+  background-color: #f4f4f4;
 }
 .signup-parent {
   display: flex;
@@ -337,8 +309,7 @@ cite {
 }
 /* form  */
 .Input {
-  background-color:var(--bg1-color);
-  transition: background-color 0.3s ease-in-out;
+  background-color: #212529;
 }
 .container__parent {
   display: flex;
@@ -394,8 +365,7 @@ form {
 }
 
 footer {
-  background-color:var(--secondary-color);
-  transition: background-color 0.3s ease-in-out;
+  background-color: rgb(58, 56, 56);
   height: 11rem;
 }
 .social-link {
@@ -420,7 +390,7 @@ footer {
 .text-value a,
 .icon-footer {
   font-size: 160%;
-  color: var(--font2-color);
+  color: white;
 }
 .social-link li {
   padding-right: 10%;
@@ -453,51 +423,4 @@ footer {
   transition: transform 0.3s;
 }
 
-.onoffswitch {
-  position: relative; width: 90px;
-  -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
-}
-.onoffswitch-checkbox {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
-}
-.onoffswitch-label {
-  display: block; overflow: hidden; cursor: pointer;
-  border: 2px solid #999999; border-radius: 20px;
-}
-.onoffswitch-inner {
-  display: block; width: 200%; margin-left: -100%;
-  transition: margin 0.3s ease-in 0s;
-}
-.onoffswitch-inner:before, .onoffswitch-inner:after {
-  display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
-  font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
-  box-sizing: border-box;
-}
-.onoffswitch-inner:before {
-  content: "DARK";
-  padding-left: 10px;
-  background-color: #313333; color: #FFFFFF;
-}
-.onoffswitch-inner:after {
-  content: "LIGHT";
-  padding-right: 10px;
-  background-color: #EEEEEE; color: #999999;
-  text-align: right;
-}
-.onoffswitch-switch {
-  display: block; width: 18px; margin: 6px;
-  background: #FFFFFF;
-  position: absolute; top: 0; bottom: 0;
-  right: 56px;
-  border: 2px solid #999999; border-radius: 20px;
-  transition: all 0.3s ease-in 0s; 
-}
-.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
-  margin-left: 0;
-}
-.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
-  right: 0px; 
-}
 

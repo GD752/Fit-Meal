@@ -4,7 +4,7 @@
           .signup-pricing
             span.pricing $#{plan.price}
             | /month
-            p That’s only #{plan.price/30}$  per meal
+            p That’s only #{(plan.price/30).toFixed(2)}$  per meal
         .signup-features
           ul
             li

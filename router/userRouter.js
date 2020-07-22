@@ -40,7 +40,7 @@ userRouter.patch("/updateUser/:id", isAdmin,updateUser);
 userRouter.patch("/forgetPassword", forgetPassword)
 userRouter.patch("/resetPassword/:token", resetPassword);
 userRouter.get("/logout", logout);
-userRouter.delete("/delete/:id", removeUser);
+userRouter.delete("/delete/:id",isAdmin,removeUser);
 // login 
 // forgetPassword
 //resetPassword

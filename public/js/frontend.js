@@ -10,7 +10,7 @@ let updateUserInfo=d.querySelector(".updateUserInfo")
 
 let updateProfile = d.querySelector(".updateProfile");
 let updateProfile2 = d.querySelector(".updateProfile2");
-let delUser=d.querySelectorAll(".delicon")
+let delElement=d.querySelectorAll(".delicon")
 
 async function loginHelper(email, password) {
   const response = await axios.post("/api/users/login", {
@@ -208,25 +208,25 @@ if (updateUserInfo){
     })
   }
 }
-async function delUserHelper(id){
-  let response=await axios.delete(`/api/users/delete/${id}`)
+async function delElementHelper(id,type){
+  let response=await axios.delete(`/api/${type}s/delete/${id}`)
   if (response.data.success) {
-    alert("User Deleted")
+    alert(`${type} deleted!`)
     location.reload();
   }else{
-    alert("something went wrong");
+    alert("Something went wrong");
   }
 }
-if (delUser){
-  console.log(delUser)
-  Object.keys(delUser).forEach(function(key){
-    const id=delUser[key].getAttribute('uid');
+if (delElement){
+  Object.keys(delElement).forEach(function(key){
+    const id=delElement[key].getAttribute('uid');
+    const type=delElement[key].getAttribute('type');
     console.log("In deluser")
-    delUser[key].addEventListener("click",function(e){
+    delElement[key].addEventListener("click",function(e){
       e.preventDefault();
       console.log("In click event listener")
-      if (confirm("Are you sure you want to delete this user?")) {
-        delUserHelper(id);
+      if (confirm(`Are you sure you want to delete this ${type}?`)) {
+        delElementHelper(id,type);
       }
     })
   })

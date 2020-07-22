@@ -45,7 +45,7 @@ async function getPlan(req, res) {
 
 async function updatePlan(req, res) {
   try {
-    const planId = req.params.planId;
+    const planId = req.params.id;
     const tobeUpdatedData = req.body;
     const oldPlan = await planModel.findById(planId);
     const keys = Object.keys(tobeUpdatedData);
@@ -57,20 +57,20 @@ async function updatePlan(req, res) {
       status: "PlanUpdated"
     });
   } catch (err) {
-
+    console.log(err);
   }
-
-
 }
 
 async function removePlan(req, res) {
   try {
-    const { planId } = req.params;
-    const deletedPlan = await planModel.findByIdAndDelete(planId);
-    res.json({
-      data: deletedPlan,
-      status: "successfull"
-    })
+    const {id } = req.params;
+    let del=await planModel.findByIdAndDelete(id);
+    console.log("plan id:"+id);
+    if(del){
+      res.status(200).json({
+        success: "Plan Info Deleted"
+      })
+    }
   } catch (err) {
     res.status(400).json({ err })
   }

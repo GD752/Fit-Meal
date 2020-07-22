@@ -7,12 +7,21 @@ function getTestPage(req, res) {
   })
 }
 async function getPlansListing(req, res) {
-  // 2
   const user = req.user;
   const plans = await planModel.find();
   res.render("plansListing.pug", {
     title: "Plans page",
     // 3
+    plans: plans,
+    user
+  })
+}
+
+async function plansListingUpdatable(req, res) {
+  const user = req.user;
+  const plans = await planModel.find();
+  res.render("updatePlanList.pug", {
+    title: "Plans page",
     plans: plans,
     user
   })
@@ -35,6 +44,14 @@ async function getLoginPage(req, res) {
   console.log(req.user);
   res.render("login.pug", {
     title: "Login Page",
+    user
+  })
+}
+
+async function getContactUs(req, res) {
+  const user = req.user;
+  res.render("contact", {
+    title: "Contact Page",
     user
   })
 }
@@ -107,3 +124,5 @@ module.exports.getUpdateUser = getUpdateUser;
 module.exports.getForgetPasswordPage = getForgetPasswordPage;
 module.exports.getResetPage = getResetPage;
 module.exports.getSomethingWentWrong = getSomethingWentWrong;
+module.exports.getContactUs=getContactUs;
+module.exports.plansListingUpdatable=plansListingUpdatable;

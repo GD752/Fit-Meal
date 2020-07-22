@@ -1,6 +1,9 @@
 .signup-child
         .signup-header
-          h3 #{plan.name}
+          h3 
+            |#{plan.name}
+            .delicon(,uid=`${plan.id}`,type='plan')
+              i.fa.fa-trash(aria-hidden='true',id='dicon')
           .signup-pricing
             span.pricing $#{plan.price}
             | /month
@@ -19,8 +22,5 @@
             li
               i.fas.fa-check.small-icon  
               | Free delivery
-          .signup-button
-            if(user==null)
-              a.btn.btn-full(href='/login') I'm hungry
-            else
-              a.btn.btn-full(href='#') I'm hungry
+          //- .signup-button
+          //-   a.btn.btn-full(href=`/updatePlan/${plan.id}`) Update

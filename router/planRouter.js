@@ -11,7 +11,7 @@ planRouter
   .get(getPlan)
   .patch(updatePlan);
 planRouter.delete('/delete/:id',isAdmin,removePlan);
-planRouter.patch('/update/:id',isAdmin,updatePlan);
+planRouter.patch('/updatePlan/:id',isAdmin,updatePlan);
 
 module.exports = planRouter;
 

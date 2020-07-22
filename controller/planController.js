@@ -48,16 +48,17 @@ async function updatePlan(req, res) {
     const planId = req.params.id;
     const tobeUpdatedData = req.body;
     const oldPlan = await planModel.findById(planId);
-    const keys = Object.keys(tobeUpdatedData);
-    for (key in keys) {
+    console.log(oldPlan);
+    Object.keys(tobeUpdatedData).forEach(function(key){
       oldPlan[key] = tobeUpdatedData[key];
-    }
+    })
+    console.log(oldPlan);
     await oldPlan.save();
     res.status(200).json({
-      status: "PlanUpdated"
+      success: "Plan Updated"
     });
   } catch (err) {
-    console.log(err);
+    console.log("In error of updateplan backend"+ err);
   }
 }
 

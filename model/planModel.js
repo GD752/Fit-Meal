@@ -21,7 +21,7 @@ const planSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    required: [true, "description is required"]
+    // required: [true, "description is required"]
   },
   ratingsAverage: {
     type: Number,

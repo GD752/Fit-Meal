@@ -99,6 +99,18 @@ async function getUpdateUser(req, res) {
   })
 }
 
+async function getUpdatePlan(req, res) {
+  const user=req.user;
+  const id=req.params.id;
+  const plan =await planModel.findById(id);
+  console.log(plan);
+  res.render("updatePlan.pug", {
+    title: "Update Plan",
+    user,
+    plan
+  })
+}
+
 async function getForgetPasswordPage(req, res) {
   res.render("forgetPassword.pug", {
     title: "ForgetPassword",
@@ -121,6 +133,7 @@ module.exports.getHomePage = getHomePage;
 module.exports.getProfilePage = getProfilePage;
 module.exports.getUpdateInfo = getUpdateInfo;
 module.exports.getUpdateUser = getUpdateUser;
+module.exports.getUpdatePlan = getUpdatePlan;
 module.exports.getForgetPasswordPage = getForgetPasswordPage;
 module.exports.getResetPage = getResetPage;
 module.exports.getSomethingWentWrong = getSomethingWentWrong;

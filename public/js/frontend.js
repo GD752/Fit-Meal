@@ -1,4 +1,3 @@
-//  email,password ,request backend=> reply
 let d = document;
 let loginBtn = d.querySelector(".login-button");
 let signupForm = d.querySelector(".signup");
@@ -7,6 +6,7 @@ let forgetForm = d.querySelector(".forgetPassword");
 let resetPasswordForm = d.querySelector(".resetPassword");
 let updateMyInfo=d.querySelector(".updateMyInfo")
 let updateUserInfo=d.querySelector(".updateUserInfo")
+let updatePlanInfo=d.querySelector(".updatePlanInfo")
 
 let updateProfile = d.querySelector(".updateProfile");
 let updateProfile2 = d.querySelector(".updateProfile2");
@@ -164,15 +164,35 @@ if (updateMyInfo){
   })
 
 }
-async function updateUserHelper(email,name,role,id){
-  console.log("Frontend update user helper")
-  const response = await axios.patch(`/api/users/updateUser/${id}`, { email,name,role });
+async function updateElementHelper(data,id,type){
+  console.log("Frontend update element helper")
+  let path=`/api/users/updateUser/${id}`;
+  if(type=='plan'){
+    path=`/api/plans/updatePlan/${id}`;
+  }
+  const response = await axios.patch(path, data);
   if (response.data.success) {
-    alert("information updated")
+    alert("Information updated")
     location.reload();
   }else{
     alert("something went wrong");
   }
+}
+
+if(updatePlanInfo){
+  let id=d.querySelector("[name=name]").getAttribute('uid')
+  console.log("Plan id:"+id)
+  updatePlanInfo.addEventListener("submit",function(e){
+    e.preventDefault();
+    let description=d.querySelector("[name=description]").value
+    let name=d.querySelector("[name=name]").value
+    let price=d.querySelector("[name=price]").value
+    let discount=d.querySelector("[name=discount]").value
+    if(price&&name&&description&&discount)
+      updateElementHelper({name,price, discount, description},id,'plan')
+    else
+      alert("Invalid entry in field!")
+  })
 }
 
 if (updateUserInfo){
@@ -183,7 +203,7 @@ if (updateUserInfo){
     let name=d.querySelector("[name=name1]").value
     let role=d.querySelector("[name=role1]").value
     if(email&&name&&role)
-      updateUserHelper(email,name,role,id)
+      updateElementHelper({email,name,role},id,'user')
     else
       console.log("undefined email or name")
   })

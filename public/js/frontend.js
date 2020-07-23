@@ -11,12 +11,36 @@ let updateProfile = d.querySelector(".updateProfile");
 let updateProfile2 = d.querySelector(".updateProfile2");
 let delElement=d.querySelectorAll(".delicon")
 let search=d.querySelector('input[name="search"]')
+let addPlan=d.querySelector('.createPlan')
+
+async function addPlanHelper(data){
+  const response=await axios.post("/api/plans/createPlan",data);
+  if (response.data.success) {
+    alert("New Plan Created")
+    location.assign("/managePlans");
+  } else {
+    alert("Something went wrong!");
+  }
+}
+
+if(addPlan){
+  addPlan.addEventListener("submit",function(e){
+    e.preventDefault();
+    let description=d.querySelector("[name=description]").value
+    let name=d.querySelector("[name=name]").value
+    let price=d.querySelector("[name=price]").value
+    let discount=d.querySelector("[name=discount]").value
+    if(price&&name&&description&&discount)
+      addPlanHelper({name,price, discount, description})
+    else
+      alert("Invalid entry in field!")
+  })
+}
 
 async function loginHelper(email, password) {
   const response = await axios.post("/api/users/login", {
     email, password
   })
-  console.log(response.data);
   if (response.data.status == "successfull") {
     alert("Login Successfull")
     location.assign("/profilePage");

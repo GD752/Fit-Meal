@@ -20,7 +20,7 @@ async function createPlan(req, res) {
   // data
   try {
     const plan = await planModel.create(req.body);
-    res.status(201).json({ status: "New Plan Created", plan });
+    res.status(201).json({ success: "New Plan Created", plan });
   }
   catch (err) {
 

@@ -5,4 +5,7 @@ block content
     h2 UPDATE PLANS
     .signup-parent
       for plan in plans
-        include upPlanCard 
+        include upPlanCard
+      a(href='/addPlan').add.signup-child
+        i.fa.fa-plus-circle(aria-hidden='true')
+        #text Add Plan

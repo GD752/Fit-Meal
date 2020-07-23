@@ -558,7 +558,7 @@ td{
   text-align: center;
   margin: 0 auto;
 }
-.updateUserInfo,.updateMyInfo,.updatePlanInfo,.forgetPassword{
+.updateUserInfo,.updateMyInfo,.updatePlanInfo,.forgetPassword, .createPlan{
   display: inline-block;
   padding-top: 9vh;
   padding-bottom: 1vh;
@@ -574,4 +574,48 @@ td{
   height: 100%;
   display: inline-block;
   margin-right: 1vw;
+}
+.profile-container{
+  width: 50%;
+  text-align: center;
+  margin: 1rem auto;
+  padding-bottom: 1rem;
+  padding-top: 0.8rem;
+  border: 2px solid var(--font2-color);
+  border-radius: 2rem;
+  border-collapse: collapse;
+}
+.profile-container p{
+  margin-top: 0.2vh;
+  font-size: 22px;
+}
+.profile-container a{
+  color: var(--primary-color);
+}
+.profile-container a:hover{
+  color: rgb(252, 94, 94);
+  transition: color 0.3s;
+}
+.add,.signup-child{
+  text-align: center;
+}
+.fa-plus-circle{
+  font-size: 12rem;
+  color: rgb(252, 94, 94);
+}
+a #text{
+  display: block;
+  font-size: 26px;
+  padding-top: 2rem;
+  color: var(--primary-color);
+}
+.add{
+  padding-top: 5rem;
+}
+.fa-plus-circle:hover{
+  transform: scale(1.3);
+  transition: transform 0.3s;
+}
+.fa.fa-search{
+  display: inline;
 }

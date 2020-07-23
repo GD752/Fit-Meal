@@ -7,10 +7,13 @@ block content
         img(src=`${user.profileImage}`,class="profileimg")  
     p #{user.name}
     p Email: #{user.email}
-    a(href="/updateInfo") Update info
+    p
+      a(href="/updateInfo") Update info
     if user.role=="admin"
-      a(href="/manageUsers") Manage Users
-      a(href="/managePlans") Manage Plans
+      p
+        a(href="/manageUsers") Manage Users
+      p
+        a(href="/managePlans") Manage Plans
   //- stlye.
   //-   .profileimg{
   //-     height:10vh;

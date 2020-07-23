@@ -53,9 +53,16 @@ async function getContactUs(req, res) {
   })
 }
 
+async function getCreatePlan(req,res){
+  const user=req.user;
+  res.render("createPlan",{
+    title: 'Create Plan',
+    user
+  })
+}
+
 async function getSignupPage(req, res) {
   const user = req.user;
-  console.log(req.user);
   res.render("signup.pug", {
     title: "Signup Page",
     user
@@ -135,3 +142,4 @@ module.exports.getResetPage = getResetPage;
 module.exports.getSomethingWentWrong = getSomethingWentWrong;
 module.exports.getContactUs=getContactUs;
 module.exports.plansListingUpdatable=plansListingUpdatable;
+module.exports.getCreatePlan=getCreatePlan;

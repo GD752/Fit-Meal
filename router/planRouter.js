@@ -3,7 +3,7 @@ const planRouter = express.Router();
 const { getPlan, removePlan, createPlan, updatePlan } = require("../controller/planController")
 const { protectRoute, isAuthorized, isAdmin } = require("../controller/authController")
 planRouter
-  .route("")
+  .route("/createPlan")
   .post(protectRoute, isAuthorized(["admin", "resturant owner"]), createPlan);
 planRouter
   .route("/:planId")

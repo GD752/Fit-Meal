@@ -1,7 +1,7 @@
 const express = require("express");
 const viewRouter = express.Router();
-const { getUpdatePlan,getSignupPage,getUsersListing, getPlansListing, getLoginPage, getHomePage, getProfilePage,getContactUs, getForgetPasswordPage,getResetPage,getSomethingWentWrong, getUpdateInfo,getUpdateUser,plansListingUpdatable, getSearchPlans} = require("../controller/viewController");
-const { isUserLoggedIn, protectRoute, handleResetRequest, resetPassword, isAdmin } = require("../controller/authController");
+const { getCreatePlan,getUpdatePlan,getSignupPage,getUsersListing, getPlansListing, getLoginPage, getHomePage, getProfilePage,getContactUs, getForgetPasswordPage,getResetPage,getSomethingWentWrong, getUpdateInfo,getUpdateUser,plansListingUpdatable, getSearchPlans} = require("../controller/viewController");
+const { isUserLoggedIn, protectRoute, handleResetRequest, resetPassword, isAdmin, isAuthorized } = require("../controller/authController");
 // token
 viewRouter.use(isUserLoggedIn)
 viewRouter.get("/manageUsers", isAdmin,getUsersListing);
@@ -19,4 +19,5 @@ viewRouter.get("/resetPassword/:token", handleResetRequest,getResetPage)
 viewRouter.get("/updateUser/:id",isAdmin,getUpdateUser)
 viewRouter.get("/updatePlan/:id",isAdmin,getUpdatePlan)
 viewRouter.get("/managePlans",isAdmin,plansListingUpdatable)
+viewRouter.get("/addPlan",isAuthorized(["admin", "resturant owner"]),getCreatePlan)
 module.exports = viewRouter;

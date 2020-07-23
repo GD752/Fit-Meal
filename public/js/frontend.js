@@ -7,12 +7,10 @@ let resetPasswordForm = d.querySelector(".resetPassword");
 let updateMyInfo=d.querySelector(".updateMyInfo")
 let updateUserInfo=d.querySelector(".updateUserInfo")
 let updatePlanInfo=d.querySelector(".updatePlanInfo")
-
 let updateProfile = d.querySelector(".updateProfile");
 let updateProfile2 = d.querySelector(".updateProfile2");
 let delElement=d.querySelectorAll(".delicon")
 let search=d.querySelector('input[name="search"]')
-console.log(search);
 
 async function loginHelper(email, password) {
   const response = await axios.post("/api/users/login", {

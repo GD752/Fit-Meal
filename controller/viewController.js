@@ -4,14 +4,8 @@ let userModel = require("../model/userModel");
 
 async function getPlansListing(req, res) {
   const user = req.user;
-  const val=req.query.name;
-  let plans=null;
-  if(val){
-    plans = await planModel.find({'name':new RegExp(val,'i')});
-  }
-  else{
-    plans = await planModel.find();
-  }
+  let val=req.query.name;
+  const plans= await planModel.find({'name':new RegExp(val,'i')});
   res.render("plansListing.pug", {
     title: "Plans page",
     // 3
@@ -22,36 +16,23 @@ async function getPlansListing(req, res) {
 
 async function plansListingUpdatable(req, res) {
   const user = req.user;
-  const val=req.query.name;
-  let plans=null;
-  if(val){
-    plans = await planModel.find({'name':new RegExp(val,'i')});
-  }
-  else{
-    plans = await planModel.find();
-  }
+  let val=req.query.name;
+  const plans = await planModel.find({'name':new RegExp(val,'i')});
   res.render("updatePlanList.pug", {
     title: "Plans page",
     plans: plans,
-    user
+    user,val
   })
 }
 
 async function getUsersListing(req, res) {
   const user = req.user;
-  const val=req.query.name;
-  let users=null;
-  if(val){
-    users = await userModel.find({'name':new RegExp(val,'i')});
-  }
-  else{
-    users = await userModel.find();
-  }
+  let val=req.query.name;
+  const users = await userModel.find({'name':new RegExp(val,'i')});
   res.render("usersListing.pug", {
     title: "Users page",
-    // 3
     users: users,
-    user
+    user,val
   })
 }
 

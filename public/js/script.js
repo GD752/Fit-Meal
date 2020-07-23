@@ -3,7 +3,7 @@ window.onscroll = function() {
 };
 // DOM Select
 var nav = document.querySelector("nav");
-var features = document.querySelector(".features");
+var features = document.querySelector("#features");
 
 function myfunction() {
   var dftop = window.pageYOffset;
@@ -66,9 +66,10 @@ const developers = document.querySelector(".developer");
 
 function init() {
   const customers = [
-    "DEVELOPERS",
     "FITNESS FREAKS",
     "VEGANS",
+    "DIABETICS",
+    "LACTOSE INTOLERANTS",
     "EVERYONE"
   ];
   const wait = 3000;

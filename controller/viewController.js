@@ -1,25 +1,35 @@
 // 1
 let planModel = require("../model/planModel");
 let userModel = require("../model/userModel");
-function getTestPage(req, res) {
-  res.render("test.pug", {
-    title: "Test Page"
-  })
-}
+
 async function getPlansListing(req, res) {
   const user = req.user;
-  const plans = await planModel.find();
+  const val=req.query.name;
+  let plans=null;
+  if(val){
+    plans = await planModel.find({'name':new RegExp(val,'i')});
+  }
+  else{
+    plans = await planModel.find();
+  }
   res.render("plansListing.pug", {
     title: "Plans page",
     // 3
     plans: plans,
-    user
+    user,val
   })
 }
 
 async function plansListingUpdatable(req, res) {
   const user = req.user;
-  const plans = await planModel.find();
+  const val=req.query.name;
+  let plans=null;
+  if(val){
+    plans = await planModel.find({'name':new RegExp(val,'i')});
+  }
+  else{
+    plans = await planModel.find();
+  }
   res.render("updatePlanList.pug", {
     title: "Plans page",
     plans: plans,
@@ -28,9 +38,15 @@ async function plansListingUpdatable(req, res) {
 }
 
 async function getUsersListing(req, res) {
-  // 2
   const user = req.user;
-  const users = await userModel.find();
+  const val=req.query.name;
+  let users=null;
+  if(val){
+    users = await userModel.find({'name':new RegExp(val,'i')});
+  }
+  else{
+    users = await userModel.find();
+  }
   res.render("usersListing.pug", {
     title: "Users page",
     // 3
@@ -88,7 +104,6 @@ async function getUpdateInfo(req, res) {
 }
 
 async function getUpdateUser(req, res) {
-  console.log("Getupdate user")
   const user=req.user;
   const id=req.params.id;
   const user1 =await userModel.findById(id);
@@ -124,7 +139,7 @@ async function getResetPage(req, res) {
 async function getSomethingWentWrong(req, res) {
   res.render("somethingWentWrong");
 }
-module.exports.getTestPage = getTestPage;
+
 module.exports.getPlansListing = getPlansListing;
 module.exports.getUsersListing = getUsersListing;
 module.exports.getLoginPage = getLoginPage;

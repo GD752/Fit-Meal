@@ -233,28 +233,6 @@ async function handleResetRequest(req, res, next) {
   }
 }
 
-async function handleUserUpdate(req, res, next) {
-  try {
-    const { id } = req.params;
-    console.log("huu: "+id);
-    let user = await userModel.findById(id);
-    
-
-    if (user) {
-      console.log(user)
-      // console.log("I was inside");
-      next();
-
-      // token verify 
-    } else {
-      res.redirect("/somethingWentWrong");
-    }
-
-  } catch (err) {
-    res.redirect("/somethingWentWrong");
-  }
-}
-
 async function resetPassword(req, res) {
   try {
     const token = req.params.token;
@@ -298,7 +276,7 @@ module.exports.resetPassword = resetPassword;
 module.exports.isUserLoggedIn = isUserLoggedIn;
 module.exports.logout = logout;
 module.exports.handleResetRequest = handleResetRequest;
-module.exports.handleUserUpdate = handleUserUpdate;
+
 // login
 // user verify
 // protect Route 

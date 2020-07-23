@@ -1,19 +1,20 @@
 const planModel = require("../model/planModel");
 
-async function getAllPlans(req, res) {
-  try {
-    const plans = await planModel.find();
-    res.status(200).json({
-      status: "successfull",
-      plans
-    })
-  } catch (err) {
-    res.status(200).json({
-      err
-    })
-  }
+// async function getAllPlans(req, res) {
+//   try {
+//     const plans = await planModel.find();
+//     res.status(200).json({
+//       status: "successfull",
+//       plans
+//     })
+//   } catch (err) {
+//     res.status(200).json({
+//       err
+//     })
+//   }
+// }
 
-}
+
 
 async function createPlan(req, res) {
   // data
@@ -78,7 +79,7 @@ async function removePlan(req, res) {
 
 }
 
-module.exports.getAllPlans = getAllPlans;
+// module.exports.getAllPlans = getAllPlans;
 module.exports.getPlan = getPlan;
 module.exports.createPlan = createPlan;
 module.exports.updatePlan = updatePlan;

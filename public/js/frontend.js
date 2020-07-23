@@ -11,6 +11,8 @@ let updatePlanInfo=d.querySelector(".updatePlanInfo")
 let updateProfile = d.querySelector(".updateProfile");
 let updateProfile2 = d.querySelector(".updateProfile2");
 let delElement=d.querySelectorAll(".delicon")
+let search=d.querySelector('input[name="search"]')
+console.log(search);
 
 async function loginHelper(email, password) {
   const response = await axios.post("/api/users/login", {
@@ -23,6 +25,18 @@ async function loginHelper(email, password) {
   } else {
     alert("User ID or password is incorrect!");
   }
+}
+
+
+if(search){
+  const sbtn=d.querySelector('button[name="searchbtn"]');
+  let loc=location.href.split('?').shift();
+  sbtn.addEventListener("click",function(e){
+    let val=search.value;
+    console.log(val);
+    e.preventDefault();
+    location.replace(`${loc}?name=${val}`)
+  })
 }
 
 async function signupHelper(email, password, confirmPassword, name) {
@@ -241,10 +255,8 @@ if (delElement){
   Object.keys(delElement).forEach(function(key){
     const id=delElement[key].getAttribute('uid');
     const type=delElement[key].getAttribute('type');
-    console.log("In deluser")
     delElement[key].addEventListener("click",function(e){
       e.preventDefault();
-      console.log("In click event listener")
       if (confirm(`Are you sure you want to delete this ${type}?`)) {
         delElementHelper(id,type);
       }

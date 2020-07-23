@@ -1,12 +1,11 @@
 const express = require("express");
 const viewRouter = express.Router();
-const { getTestPage,getUpdatePlan,getSignupPage,getUsersListing, getPlansListing, getLoginPage, getHomePage, getProfilePage,getContactUs, getForgetPasswordPage,getResetPage,getSomethingWentWrong, getUpdateInfo,getUpdateUser,plansListingUpdatable} = require("../controller/viewController");
+const { getUpdatePlan,getSignupPage,getUsersListing, getPlansListing, getLoginPage, getHomePage, getProfilePage,getContactUs, getForgetPasswordPage,getResetPage,getSomethingWentWrong, getUpdateInfo,getUpdateUser,plansListingUpdatable, getSearchPlans} = require("../controller/viewController");
 const { isUserLoggedIn, protectRoute, handleResetRequest, resetPassword, isAdmin } = require("../controller/authController");
 // token
 viewRouter.use(isUserLoggedIn)
 viewRouter.get("/manageUsers", isAdmin,getUsersListing);
 viewRouter.get("/plans", getPlansListing);
-viewRouter.get("/test", getTestPage);
 viewRouter.get("/contactUs", getContactUs);
 viewRouter.get("/login", getLoginPage);
 viewRouter.get("/signup", getSignupPage);

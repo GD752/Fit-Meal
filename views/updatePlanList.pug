@@ -3,9 +3,12 @@ block content
   include search
   section.signup
     h2 UPDATE PLANS
+    if(plans.length==0)
+      h3 Sorry no results found!
     .signup-parent
       for plan in plans
         include upPlanCard
       a(href='/addPlan').add.signup-child
         i.fa.fa-plus-circle(aria-hidden='true')
         #text Add Plan
+      

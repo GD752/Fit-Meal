@@ -3,6 +3,9 @@ block content
   include search
   section.signup
     h2 START EATING HEALTHY TODAY
-    .signup-parent
-      for plan in plans
-        include planCard 
+    if(plans.length!=0)
+      .signup-parent
+        for plan in plans
+          include planCard 
+    else
+      h3 Sorry no resuls found !

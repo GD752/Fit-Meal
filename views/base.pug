@@ -4,7 +4,6 @@ html
     title #{title}
     link(href='https://fonts.googleapis.com/css?family=Lato&display=swap', rel='stylesheet')
     link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.6.3/css/all.css', integrity='sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/', crossorigin='anonymous')
-    //link(rel='stylesheet', href='/css/theme.scss')
     link(rel='stylesheet', href='/css/style.css')
     
   body
@@ -14,6 +13,7 @@ html
       block content
         h1 I am a placeholder where actual content will appear in  child pages
     include footer
+    script(src="https://js.stripe.com/v3/")
     script(src="js/bgtheme.js")
     script(src="https://unpkg.com/axios/dist/axios.min.js")
     script(src="js/frontend.js")

@@ -7,7 +7,6 @@ const { JWT_SECRET } = require("../configs/config");
 const { json } = require("express");
 async function signup(req, res) {
   try {
-    console.log(req.body);
     const user = await userModel.create(req.body);
     res.status(201).json({
       status: "user signed up",

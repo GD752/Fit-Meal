@@ -3,9 +3,10 @@ block content
   section.Input.fadeInUp
     h2 SIGNUP
     .container__parent
-      video.bg-video__content(autoplay='', muted='', loop='')
-        source(src='Avocado.mp4', type='video/mp4')
-        |         Your browser is not supported
+      .vidDiv
+        video.bg-video__content(autoplay='', muted='', loop='')
+          source(src='Avocado.mp4', type='video/mp4')
+          |         Your browser is not supported
       form.signup
         .entry
           .entry-text
@@ -24,4 +25,4 @@ block content
             | Confirm  Password
           input(type='password', name="ConfirmPassword", placeholder='**********' class="confirmPassword")
         .btn-parent
-          button.btn.btn-full.form-button(type="submit") Login
+          button.btn.btn-full.form-button(type="submit") Signup

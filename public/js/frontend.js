@@ -1,4 +1,5 @@
 let d = document;
+const stripe = Stripe('pk_test_51H9EFGK2USD6katkGsCCEPQ3iEDgldLR0ubytDQ3ZrTmi7xh452z8kYS4pYzlKFBmbMVELAe9FN96h8xFT5w5yik006PlPtHdB');
 let loginBtn = d.querySelector(".login-button");
 let signupForm = d.querySelector(".signup");
 let logoutBtn = d.querySelector(".logout");
@@ -12,6 +13,8 @@ let updateProfile2 = d.querySelector(".updateProfile2");
 let delElement=d.querySelectorAll(".delicon")
 let search=d.querySelector('input[name="search"]')
 let addPlan=d.querySelector('.createPlan')
+const paymentBtn = d.querySelector(".payment");
+
 
 async function addPlanHelper(data){
   const response=await axios.post("/api/plans/createPlan",data);
@@ -158,6 +161,7 @@ if (resetPasswordForm) {
 }
 
 async function updateProfileHelper(formData) {
+  console.log("Img updater")
   let response = await axios.patch("/api/users/updateProfile", formData);
   if (response.data.success) {
     alert("profile Image uploaded")
@@ -168,6 +172,7 @@ async function updateProfileHelper(formData) {
 }
 //  image backend 
 if (updateProfile) {
+  console.log("Img updater")
   updateProfile.addEventListener("change", function (e) {
     e.preventDefault();
     // multipart data send 
@@ -284,5 +289,30 @@ if (delElement){
       }
     })
   })
-  
+}
+
+async function payementHelper(planId) {
+  console.log("I helper")
+  const response = await axios.post("/api/bookings/createSession", { planId });
+  if (response.data.status) {
+    const { session } = response.data;
+    const id = session.id;
+    stripe.redirectToCheckout({
+      sessionId: id
+    }).then(function (result) {
+      alert(result.error.message);
+    });
+
+  } else {
+    alert("Payment failed");
+  }
+}
+
+if (paymentBtn) {
+  paymentBtn.addEventListener("click", function (e) {
+    console.log("after clicking payment")
+    e.preventDefault();
+    const planId = paymentBtn.getAttribute("plan-id");
+    payementHelper(planId);
+  })
 }

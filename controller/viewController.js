@@ -116,7 +116,7 @@ async function getUpdatePlan(req, res) {
 
 async function getForgetPasswordPage(req, res) {
   res.render("forgetPassword.pug", {
-    title: "ForgetPassword",
+    title: "ForgetPassword"
   })
 }
 async function getResetPage(req, res) {
@@ -127,7 +127,15 @@ async function getResetPage(req, res) {
 async function getSomethingWentWrong(req, res) {
   res.render("somethingWentWrong");
 }
+async function getConfirmation(req,res){
+  const plan=await planModel.findById(req.params.id)
+  res.render('beforePayment',{
+    title: "Payment Confirmation",
+    plan
+  })
+}
 
+module.exports.getConfirmation=getConfirmation;
 module.exports.getPlansListing = getPlansListing;
 module.exports.getUsersListing = getUsersListing;
 module.exports.getLoginPage = getLoginPage;

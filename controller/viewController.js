@@ -1,6 +1,7 @@
 // 1
 let planModel = require("../model/planModel");
 let userModel = require("../model/userModel");
+let bookingModel = require("../model/bookingModel");
 
 async function getPlansListing(req, res) {
   const user = req.user;
@@ -11,6 +12,16 @@ async function getPlansListing(req, res) {
     // 3
     plans: plans,
     user,val
+  })
+}
+
+async function getAllBookings(req,res){
+  const bookings=await bookingModel.find();
+  const user = req.user;
+  res.render('allBookings',{
+    title: 'Booking Details',
+    bookings: bookings,
+    user
   })
 }
 
@@ -128,10 +139,12 @@ async function getSomethingWentWrong(req, res) {
   res.render("somethingWentWrong");
 }
 async function getConfirmation(req,res){
+  const user=req.user;
   const plan=await planModel.findById(req.params.id)
   res.render('beforePayment',{
     title: "Payment Confirmation",
-    plan
+    plan,
+    user
   })
 }
 
@@ -151,3 +164,4 @@ module.exports.getSomethingWentWrong = getSomethingWentWrong;
 module.exports.getContactUs=getContactUs;
 module.exports.plansListingUpdatable=plansListingUpdatable;
 module.exports.getCreatePlan=getCreatePlan;
+module.exports.getAllBookings=getAllBookings;

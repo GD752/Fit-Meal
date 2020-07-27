@@ -25,7 +25,6 @@ const planSchema = new mongoose.Schema({
   },
   ratingsAverage: {
     type: Number,
-    // in case of no input 
     default: 7,
     min: [1, "Plan rating can't be less than 1"],
     max: [10, "Plan rating can't be  more tha 10"]
@@ -38,7 +37,8 @@ const planSchema = new mongoose.Schema({
   },
   discount: {
     type: Number,
-    // custom validator
+    default: 0,
+    //custom validator
     validate: {
       validator: function () {
         return this.price > this.discount

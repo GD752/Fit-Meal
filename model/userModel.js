@@ -23,16 +23,16 @@ const userSchema = new mongoose.Schema({
     minlength: 7,
     required: [true, "password is required"],
     select: false
-  }, confirmPassword: {
-    type: String,
-    required: [true, "confirmPassword is required"],
-    minlength: 7,
-    validate: {
-      validator: function () {
-        return this.password == this.confirmPassword
-      },
-      message: "Password and confirm password should be same"
-    }
+  // }, confirmPassword: {
+  //   type: String,
+  //   required: [true, "confirmPassword is required"],
+  //   minlength: 7,
+  //   validate: {
+  //     validator: function () {
+  //       return this.password == this.confirmPassword
+  //     },
+  //     message: "Password and confirm password should be same"
+  //   }
   }, role: {
     type: String,
     enum: ["admin", "restaurant owner", "Delivery Boy", "user"],
@@ -58,9 +58,8 @@ userSchema.methods.createToken = function () {
   // 
   return token;
 }
-userSchema.methods.resetPasswordhelper = function (password, confirmPassword) {
+userSchema.methods.resetPasswordhelper = function (password) {
   this.password = password;
-  this.confirmPassword = confirmPassword;
   this.resetToken = undefined;
   this.expiresIn = undefined;
 }

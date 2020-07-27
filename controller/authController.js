@@ -3,26 +3,39 @@
 const userModel = require("../model/userModel");
 const Email = require("../utility/email");
 const jwt = require("jsonwebtoken");
-const { JWT_SECRET } = require("../configs/config");
+const JWT_SECRET  = process.env.JWT_SECRET||require("../configs/config").JWT_SECRET;
 const { json } = require("express");
+const Bcrypt = require("bcryptjs");
 async function signup(req, res) {
   try {
-    const user = await userModel.create(req.body);
+    const data=req.body;
+    if(data.password!=data.confirmPassword){
+      throw "Password and Confirm Password should be same"
+    }
+    data['confirmPassword']=undefined;
+    data.password = Bcrypt.hashSync(data.password, 10);
+    console.log(data.password)
+    const user = await userModel.create(data);
+    console.log(user);
     res.status(201).json({
       status: "user signed up",
       user
     })
   } catch (err) {
+    console.log("In catch of signup")
+    console.log(err.message)
     res.status(400).json({ err: err.message })
   }
 }
 async function login(req, res) {
   try {
     const { email, password } = req.body;
+    console.log(req.body)
     const user = await userModel.findOne({ email }).select("+password");
-    // console.log(user);
+    console.log(user);
+    const check=Bcrypt.compareSync(password, user.password)
     if (user) {
-      if (password == user.password) {
+      if (check) {
         // jwt
         const { _id } = user;
         const token = jwt.sign({ id: _id }, JWT_SECRET, {
@@ -238,8 +251,13 @@ async function resetPassword(req, res) {
     const user = await userModel.findOne({ resetToken: token });
     if (user) {
       if (Date.now() < user.expiresIn) {
-        const { password, confirmPassword } = req.body;
-        user.resetPasswordhelper(password, confirmPassword, token);
+        const data=req.body;
+        if(data.password!=data.confirmPassword){
+          throw "Password and Confirm Password should be same"
+        }
+        data.password = Bcrypt.hashSync(req.body.password, 10);
+        const { password} = req.body;
+        user.resetPasswordhelper(password,token);
         await user.save();
         console.log(user)
         res.status(200).json({

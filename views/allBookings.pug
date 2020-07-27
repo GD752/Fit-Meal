@@ -1,0 +1,17 @@
+extends base
+block content
+  h2 START EATING HEALTHY TODAY
+  if(bookings.length!=0)
+    .signup-parent
+      table
+        th Plan
+        th User
+        th Booking ID
+        th Expires in
+        for booking in bookings
+          td #{booking.plan}
+          td #{booking.user}
+          td #{booking.id}
+          td #{booking.expires}
+  else
+    h3 Sorry no resuls found !

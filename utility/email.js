@@ -10,9 +10,9 @@ module.exports = async function emailSender(options) {
     service: "gmail",
     auth: {
       // email Id
-      user: config.EMAIL_ID,
+      user: process.config.EMAIL_ID||config.EMAIL_ID,
       // app password
-      pass: config.EMAIL_PASSWORD
+      pass: process.config.EMAIL_PASSWORD||config.EMAIL_PASSWORD
     }
   });
   //2. parameters

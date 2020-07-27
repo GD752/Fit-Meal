@@ -64,14 +64,11 @@ if(search){
   })
 }
 
-async function signupHelper(email, password, confirmPassword, name) {
-  const response = await axios.post("/api/users/signup", {
-    email, password, confirmPassword, name
-  });
+async function signupHelper(sdata) {
+  const response = await axios.post("/api/users/signup", sdata);
   if(response.data.status=="user signed up") {
     alert("Your are signed up");
-    user =response.data.user;
-    const {email,password}=user;
+    const {email,password}=sdata;
     const resp = await axios.post("/api/users/login", {
      email, password
     })
@@ -100,10 +97,10 @@ async function forgetPasswordHelper(email) {
     alert("Email Send to user");
   }
 }
-async function resetPasswordHelper(password, confirmPassword, resetToken) {
+async function resetPasswordHelper(password,confirmPassword, resetToken) {
   const response = await axios.patch(`/api/users/resetPassword/${resetToken}`,
     {
-      password, confirmPassword
+      password,confirmPassword
     })
   if (response.data.success=="user password updated login with new password") {
     alert("Your password has been reset");
@@ -121,7 +118,7 @@ if (signupForm) {
     const password = d.querySelector(".password").value
     const confirmPassword = d.querySelector(".confirmPassword").value;
     const name = d.querySelector(".name").value;
-    signupHelper(email, password, confirmPassword, name);
+    signupHelper({email, password, confirmPassword, name});
   })
 }
 
@@ -294,7 +291,7 @@ if (delElement){
 async function payementHelper(planId) {
   console.log("I helper")
   const response = await axios.post("/api/bookings/createSession", { planId });
-  if (response.data.status=='success') {
+  if (response.data.status) {
     const { session } = response.data;
     const id = session.id;
     stripe.redirectToCheckout({

@@ -21,7 +21,6 @@ app.set("view engine", "pug");
 // templates address
 app.set("views", "views");
 
-app.use("/api/reviews", reviewRouter);
 app.use("/", viewRouter);
 app.use("/api/plans", planRouter)
 app.use("/api/users", userRouter);

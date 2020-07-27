@@ -294,7 +294,7 @@ if (delElement){
 async function payementHelper(planId) {
   console.log("I helper")
   const response = await axios.post("/api/bookings/createSession", { planId });
-  if (response.data.status) {
+  if (response.data.status=='success') {
     const { session } = response.data;
     const id = session.id;
     stripe.redirectToCheckout({
@@ -302,7 +302,6 @@ async function payementHelper(planId) {
     }).then(function (result) {
       alert(result.error.message);
     });
-
   } else {
     alert("Payment failed");
   }

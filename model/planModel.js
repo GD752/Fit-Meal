@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-const config = require("../configs/config");
 // mongodb cloud db 
-mongoose.connect(config.DB_LINK, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }).then(function (conn) {
+const link=process.env.DB_LINK||require("../configs/config").config.DB_LINK
+mongoose.connect(link, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }).then(function (conn) {
   // console.log("Connection to mongodb established");
   // console.log(conn)
   console.log("Plan Db connected");

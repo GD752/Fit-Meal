@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const link=process.env.DB_LINK||require("../configs/config").config.DB_LINK
+const link=process.env.DB_LINK||require("../configs/config").DB_LINK
 const crypto = require("crypto");
 // mongodb cloud db 
 mongoose.connect(link, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }).then(function (conn) {

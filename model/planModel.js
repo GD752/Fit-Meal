@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 // mongodb cloud db 
-const link=process.env.DB_LINK||require("../configs/config").config.DB_LINK
+const link=process.env.DB_LINK||require("../configs/config").DB_LINK
 mongoose.connect(link, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }).then(function (conn) {
   // console.log("Connection to mongodb established");
   // console.log(conn)

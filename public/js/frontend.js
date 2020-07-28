@@ -14,7 +14,7 @@ let delElement=d.querySelectorAll(".delicon")
 let search=d.querySelector('input[name="search"]')
 let addPlan=d.querySelector('.createPlan')
 const paymentBtn = d.querySelector(".payment");
-
+const bpayment=d.querySelector(".beforePayment")
 
 async function addPlanHelper(data){
   const response=await axios.post("/api/plans/createPlan",data);
@@ -56,11 +56,15 @@ async function loginHelper(email, password) {
 if(search){
   const sbtn=d.querySelector('button[name="searchbtn"]');
   let loc=location.href.split('?').shift();
+  const sortby= d.querySelector('[name="sortSelect"]')
   sbtn.addEventListener("click",function(e){
     let val=search.value;
-    console.log(val);
     e.preventDefault();
-    location.replace(`${loc}?name=${val}`)
+    if(sortby){
+        location.replace(`${loc}?name=${val}&sort=${sortby.value}`)
+    }
+    else
+      location.replace(`${loc}?name=${val}`)
   })
 }
 
@@ -287,8 +291,8 @@ if (delElement){
   })
 }
 
-async function payementHelper(planId) {
-  const response = await axios.post("/api/bookings/createSession", { planId });
+async function payementHelper(planId,add,time) {
+  const response = await axios.post("/api/bookings/createSession", { planId,add,time });
   if (response.data.status=='success') {
     const { session } = response.data;
     const id = session.id;
@@ -304,9 +308,11 @@ async function payementHelper(planId) {
 }
 
 if (paymentBtn) {
+  let address=d.querySelector('[name="address"]')
+  let time=d.querySelector('[name="time"]')
   paymentBtn.addEventListener("click", function (e) {
     e.preventDefault();
     const planId = paymentBtn.getAttribute("plan-id");
-    payementHelper(planId);
+    payementHelper(planId,address,time);
   })
 }

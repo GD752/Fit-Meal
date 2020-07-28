@@ -30,7 +30,7 @@ const planSchema = new mongoose.Schema({
     max: [10, "Plan rating can't be  more tha 10"]
   },
   slug: String,
-  price: {
+  netprice: {
     type: Number,
     required: true,
     min: 20
@@ -48,5 +48,8 @@ const planSchema = new mongoose.Schema({
 
   }
 })
+planSchema.virtual('price').get(function(){
+  return this.netprice+this.discount;
+});
 const planModel = mongoose.model("planmodels", planSchema);
 module.exports = planModel;

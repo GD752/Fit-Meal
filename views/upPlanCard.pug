@@ -5,9 +5,10 @@
             .delicon(,uid=`${plan.id}`,type='plan')
               i.fa.fa-trash(aria-hidden='true',id='dicon')
           .signup-pricing
-            span.pricing ₹#{plan.price}
+            strike ₹#{plan.price}
+            span.pricing ₹#{plan.netprice}
             | /month
-            p That’s only ₹#{(plan.price/30).toFixed(2)}  per meal
+            p That’s only ₹#{(plan.netprice/30).toFixed(2)}  per meal
         .signup-features
           ul
             li

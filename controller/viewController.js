@@ -6,7 +6,15 @@ let bookingModel = require("../model/bookingModel");
 async function getPlansListing(req, res) {
   const user = req.user;
   let val=req.query.name;
-  const plans= await planModel.find({'name':new RegExp(val,'i')}).limit(null).skip(null);
+  let sp=req.query.sort;
+  let mysort=null;
+  if(sp){
+    console.log(sp)
+    let sp1=sp.split(' ').shift();
+    let od=sp.split(" ").pop()
+    mysort=[[sp1,od]]
+  }
+  const plans= await planModel.find({'name':new RegExp(val,'i')}).sort(mysort);
   res.render("plansListing.pug", {
     title: "Plans page",
     // 3
@@ -25,10 +33,27 @@ async function getAllBookings(req,res){
   })
 }
 
-async function plansListingUpdatable(req, res) {
+async function getMyBookings(req,res){
   const user = req.user;
+  const bookings=await bookingModel.find({'user':user.id});
+  res.render('myBookings',{
+    title: 'My Booking Details',
+    bookings: bookings,
+    user
+  })
+}
+
+async function plansListingUpdatable(req, res) {
   let val=req.query.name;
-  const plans = await planModel.find({'name':new RegExp(val,'i')});
+  let sp=req.query.sort;
+  let mysort=null;
+  if(sp){
+    console.log(sp)
+    let sp1=sp.split(' ').shift();
+    let od=sp.split(" ").pop()
+    mysort=[[sp1,od]]
+  }
+  const plans= await planModel.find({'name':new RegExp(val,'i')}).sort(mysort);
   res.render("updatePlanList.pug", {
     title: "Plans page",
     plans: plans,
@@ -173,4 +198,5 @@ module.exports.getContactUs=getContactUs;
 module.exports.plansListingUpdatable=plansListingUpdatable;
 module.exports.getCreatePlan=getCreatePlan;
 module.exports.getAllBookings=getAllBookings;
+module.exports.getMyBookings=getMyBookings;
 module.exports.getAboutUs=getAboutUs;

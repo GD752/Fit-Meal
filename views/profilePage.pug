@@ -9,13 +9,10 @@ block content
     p Email: #{user.email}
     p
       a(href="/updateInfo") Update info
+    p
+      a(href="/myBookings") My Bookings
     if user.role=="admin"
       p
         a(href="/manageUsers") Manage Users
       p
         a(href="/managePlans") Manage Plans
-  //- stlye.
-  //-   .profileimg{
-  //-     height:10vh;
-  //-     width: 10vw
-  //-   }

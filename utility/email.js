@@ -1,5 +1,6 @@
 const nodemailer = require("nodemailer");
-const config = require("../configs/config");
+const user1= process.config.EMAIL_ID||require("../configs/config").EMAIL_ID
+const pass1= process.config.EMAIL_PASSWORD||require("../configs/config").EMAIL_PASSWORD
 module.exports = async function emailSender(options) {
   //  1. transport => configuration
   // configurations set email
@@ -10,9 +11,9 @@ module.exports = async function emailSender(options) {
     service: "gmail",
     auth: {
       // email Id
-      user: process.config.EMAIL_ID||config.EMAIL_ID,
+      user: user1,
       // app password
-      pass: process.config.EMAIL_PASSWORD||config.EMAIL_PASSWORD
+      pass: pass1
     }
   });
   //2. parameters

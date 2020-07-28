@@ -23,16 +23,6 @@ const userSchema = new mongoose.Schema({
     minlength: 7,
     required: [true, "password is required"],
     select: false
-  // }, confirmPassword: {
-  //   type: String,
-  //   required: [true, "confirmPassword is required"],
-  //   minlength: 7,
-  //   validate: {
-  //     validator: function () {
-  //       return this.password == this.confirmPassword
-  //     },
-  //     message: "Password and confirm password should be same"
-  //   }
   }, role: {
     type: String,
     enum: ["admin", "restaurant owner", "Delivery Boy", "user"],
@@ -40,10 +30,13 @@ const userSchema = new mongoose.Schema({
   },
   resetToken: String,
   expiresIn: String,
-  // 1. 
   profileImage: {
     type: String,
     default: "/img/users/default.jpeg"
+  },
+  bookings:{
+    type: [mongoose.Schema.ObjectId],
+    ref: 'bookingmodels'
   }
 })
 

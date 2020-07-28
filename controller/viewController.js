@@ -6,7 +6,7 @@ let bookingModel = require("../model/bookingModel");
 async function getPlansListing(req, res) {
   const user = req.user;
   let val=req.query.name;
-  const plans= await planModel.find({'name':new RegExp(val,'i')});
+  const plans= await planModel.find({'name':new RegExp(val,'i')}).limit(null).skip(null);
   res.render("plansListing.pug", {
     title: "Plans page",
     // 3
@@ -16,7 +16,7 @@ async function getPlansListing(req, res) {
 }
 
 async function getAllBookings(req,res){
-  const bookings=await bookingModel.find();
+  const bookings=await bookingModel.findAll();
   const user = req.user;
   res.render('allBookings',{
     title: 'Booking Details',
@@ -148,6 +148,14 @@ async function getConfirmation(req,res){
   })
 }
 
+async function getAboutUs(req,res){
+  const user= req.user;
+  res.render('about',{
+    title:"About Us",
+    user
+  })
+}
+
 module.exports.getConfirmation=getConfirmation;
 module.exports.getPlansListing = getPlansListing;
 module.exports.getUsersListing = getUsersListing;
@@ -165,3 +173,4 @@ module.exports.getContactUs=getContactUs;
 module.exports.plansListingUpdatable=plansListingUpdatable;
 module.exports.getCreatePlan=getCreatePlan;
 module.exports.getAllBookings=getAllBookings;
+module.exports.getAboutUs=getAboutUs;

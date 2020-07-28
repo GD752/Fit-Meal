@@ -133,7 +133,6 @@ if (loginBtn) {
 
 if (logoutBtn) {
   logoutBtn.addEventListener("click", function (e) {
-    // /api/users/logout
     e.preventDefault();
     logoutHelper();
   })
@@ -289,14 +288,14 @@ if (delElement){
 }
 
 async function payementHelper(planId) {
-  console.log("I helper")
   const response = await axios.post("/api/bookings/createSession", { planId });
-  if (response.data.status) {
+  if (response.data.status=='success') {
     const { session } = response.data;
     const id = session.id;
     stripe.redirectToCheckout({
       sessionId: id
     }).then(function (result) {
+      alert(result)
       alert(result.error.message);
     });
   } else {
@@ -306,7 +305,6 @@ async function payementHelper(planId) {
 
 if (paymentBtn) {
   paymentBtn.addEventListener("click", function (e) {
-    console.log("after clicking payment")
     e.preventDefault();
     const planId = paymentBtn.getAttribute("plan-id");
     payementHelper(planId);

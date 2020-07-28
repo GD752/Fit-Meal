@@ -1,16 +1,21 @@
 const mongoose = require("mongoose");
-let dateNow=new Date();
-dateNow.setDate(dateNow.getDate+1);
-dateNow.setHours(12);
-dateNow.setMinutes(0)
+let dateNow= new Date();
+let dateT=new Date();
+dateT.setDate(dateT.getDate+1);
+dateT.setHours(12);
+dateT.setMinutes(0)
 const bookingSchema = new mongoose.Schema({
   bookedAt: {
     type: Date,
-    default: new Date()
+    default: dateNow
   },
   timeOfDel: {
       type: Date,
-      default: dateNow
+      default: dateT
+  },
+  delAddress:{
+    type: String,
+    required:[true,"Address needed for delivery"]
   },
   plan: {
     type: mongoose.Schema.ObjectId,
@@ -24,7 +29,7 @@ const bookingSchema = new mongoose.Schema({
   },
   expires: {
     type: Date,
-    default: +new Date() + 30*24*60*60*1000
+    default: +dateNow + 30*24*60*60*1000
   }
 })
 

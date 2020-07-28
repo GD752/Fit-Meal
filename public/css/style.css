@@ -5,7 +5,7 @@
   --font-color: black;
   --font2-color: rgb(10, 10, 10);
   --bg-color: #f7f7f5;
-  --bg1-color:#f4f4f4;
+  --bg1-color:#ececec;
   --bg2-color:rgb(244,244,244);
   --nav-color:white;
   --shad-color:rgba(27, 38, 49, 0.1);
@@ -172,7 +172,6 @@ h2::after {
   margin-bottom: 3rem;
 }
 h3 {
-  /* font-weight: 300; */
   font-size: 125%;
   margin-bottom: 1rem;
   text-align: center;
@@ -181,56 +180,46 @@ h3 {
 .feature-para {
   line-height: 145%;
 }
-/* .How-to {
- background-color: var(--bg2-color);
- transition: background-color 0.3s ease-in-out;
+
+.how-to {
+  background-color: var(--bg1-color);
 }
-.howto-container {
+.howto-img {
+  width: 15vw;
+}
+.steps-parent {
   display: flex;
-} */
-/* .iphone-img {
-  width: 17%;
-  margin: 0 11%;
-} */
-
-.step-container {
-  position: relative;
-  top: 3rem;
-  left: 2rem;
-  /* z-index: -1rem; */
 }
-.step-container div {
-  color: #f63854;
-  height: 4rem;
-  width: 4rem;
-  border-color: #f63854;
+.steps-container{
+margin-top:3rem;
+}
+.steps-container:first-child{
+  margin-top:4rem;
+}
+.steps-para{
+  font-size: 140%;
+}
+.step-val{
+  float:left;
+  margin-right: 1.5rem;
+    font-size: 140%;
+    height: 4rem;
+    width: 4rem;
+    border: 0.1rem solid red;
+    text-align: center;
+    border-radius: 50%;
+    padding-top: 1rem;
+    color:red;
+}
+.img-container{
+  width:40%;
   text-align: center;
-  padding-top: 0.7rem;
-  border-radius: 50%;
-  border-style: solid;
-  font-size: 180%;
-  margin-bottom: 2rem;
-  margin-right: 1rem;
 }
-/* .step-container:first-child {
-  margin-top: 3rem;
-  border: 1px solid red;
-} */
-.howto-para {
-  position: relative;
-  top: 1rem;
-  left: 1rem;
-  /* margin-top: 1.5rem; */
-}
-
-.step-val {
-  float: left;
-}
-.clear-fix::after {
+.clearfix:after {
   content: "";
-  clear: both;
   display: table;
-}
+  clear: both;
+} 
 
 .comments-container {
   margin-right: 2rem;
@@ -629,4 +618,16 @@ a #text{
   width: 40%;
   align-content: center;
   text-align: center;
+}
+.logocontainer{
+  text-align: left;
+  display: flex;
+  justify-content: flex-start;
+  width: 45%;
+}
+.logo{
+  width: 8em;
+}
+.ftrimg{
+  width: 5.5em
 }

@@ -30,7 +30,7 @@ async function createSession(req, res) {
           quantity: 1
         }
       ],
-      success_url: `${req.protocol}://${req.get("host")}/bookingsPage`,
+      success_url: `${req.protocol}://${req.get("host")}/myBookings`,
       cancel_url: `${req.protocol}://${req.get("host")}/plans`
     })
     res.status(200).json({

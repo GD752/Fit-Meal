@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
-const config = require("../configs/config");
+const link=process.env.DB_LINK||require("../configs/config").config.DB_LINK
 const crypto = require("crypto");
 // mongodb cloud db 
-mongoose.connect(config.DB_LINK, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }).then(function (conn) {
+mongoose.connect(link, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }).then(function (conn) {
   // console.log("Connection to mongodb established");
   // console.log(conn)
   console.log("User Db connected");

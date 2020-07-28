@@ -631,7 +631,7 @@ a #text{
   text-align: left;
   display: flex;
   justify-content: flex-start;
-  width: 55vw;
+  width: calc(100vw - 700px);
 }
 .logo{
   width: 8em;

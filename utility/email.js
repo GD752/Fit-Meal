@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
-const user1= process.config.EMAIL_ID||require("../configs/config").EMAIL_ID
-const pass1= process.config.EMAIL_PASSWORD||require("../configs/config").EMAIL_PASSWORD
+const user1= process.env.EMAIL_ID||require("../configs/config").EMAIL_ID
+const pass1= process.env.EMAIL_PASSWORD||require("../configs/config").EMAIL_PASSWORD
 module.exports = async function emailSender(options) {
   //  1. transport => configuration
   // configurations set email

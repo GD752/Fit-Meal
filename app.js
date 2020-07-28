@@ -6,6 +6,8 @@ const userRouter = require("./router/userRouter");
 const viewRouter = require("./router/viewRouter");
 const reviewRouter = require("./router/reviewRouter");
 const bookingRouter = require("./router/bookingRouter");
+
+process.env.NODE_ENV=process.env.NODE_ENV||"dev";
 app.use(cookieParser());
 app.use(express.json());
 // 

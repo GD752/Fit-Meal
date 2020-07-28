@@ -9,7 +9,7 @@ const bookingRouter = require("./router/bookingRouter");
 app.use(cookieParser());
 app.use(express.json());
 // 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 app.use('/resetPassword/:token',express.static("public"));
 app.use('/updateUser/:id',express.static("public"));

@@ -60,6 +60,7 @@ header{
 .navigation {
   display: flex;
   justify-content: flex-end;
+  width: 100vw;
 }
 .nav-line {
   font-size: 120%;
@@ -627,11 +628,8 @@ a #text{
   text-align: center;
 }
 .logocontainer{
-  padding-top:5px;
-  text-align: left;
-  display: flex;
-  justify-content: flex-start;
-  width: calc(100vw - 757px);
+  justify-self: flex-start;
+  margin-right: auto;
 }
 .logo{
   width: 8em;

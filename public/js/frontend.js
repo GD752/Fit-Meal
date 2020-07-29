@@ -121,7 +121,8 @@ if (signupForm) {
     const confirmPassword = d.querySelector(".confirmPassword").value;
     const name = d.querySelector(".name").value;
     if(password!=confirmPassword){
-      alert("Password and confirm password are not same");;
+      alert("Password and confirm password are not same");
+      return;
     }
     signupHelper({email, password, confirmPassword, name});
   })

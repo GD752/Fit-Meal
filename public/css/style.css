@@ -641,9 +641,8 @@ a #text{
 }
 #slideshow {
   overflow: hidden;
-  height: 85vh;
-  width: 90vw;
-  height: fit-content;
+  height: 80vh;
+  width: 93vw;
   margin: 0 auto;
 }
 

@@ -49,11 +49,9 @@ async function updatePlan(req, res) {
     const planId = req.params.id;
     const tobeUpdatedData = req.body;
     const oldPlan = await planModel.findById(planId);
-    console.log(oldPlan);
     Object.keys(tobeUpdatedData).forEach(function(key){
       oldPlan[key] = tobeUpdatedData[key];
     })
-    console.log(oldPlan);
     await oldPlan.save();
     res.status(200).json({
       success: "Plan Updated"
@@ -67,7 +65,6 @@ async function removePlan(req, res) {
   try {
     const {id } = req.params;
     let del=await planModel.findByIdAndDelete(id);
-    console.log("plan id:"+id);
     if(del){
       res.status(200).json({
         success: "Plan Info Deleted"

@@ -4,7 +4,6 @@ const sharp = require("sharp");
 async function getMe(req, res) {
   try {
     const id = req.id;
-    // console.log(id);
     const user = await userModel.findById(id);
     res.status(200).json({
       data: user,
@@ -96,7 +95,6 @@ async function updateProfileHandler2(req, res) {
     //  user profile Image link update
     // process update public folder 
     //db link update 
-    // console.log(user);
     res.status(200).json({
       success: "Image uploaded"
     })
@@ -123,7 +121,6 @@ async function updateInfo(req,res){
     //  user profile Image link update
     // process update public folder 
     //db link update 
-    // console.log(user);
     res.status(200).json({
       success: "updated info"
     })
@@ -136,7 +133,6 @@ async function updateInfo(req,res){
 }
 
 async function updateUser(req,res){
-  console.log("controller update user")
   try {
     const {id} = req.params;
     const user = await userModel.findById(id);
@@ -150,7 +146,6 @@ async function updateUser(req,res){
     //  user profile Image link update
     // process update public folder 
     //db link update 
-    // console.log(user);
     res.status(200).json({
       success: "updated info"
     })

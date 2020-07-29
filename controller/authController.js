@@ -81,8 +81,6 @@ async function protectRoute(req, res, next) {
       const decryptedData = jwt.verify(token, JWT_SECRET);
       if (decryptedData) {
         const id = decryptedData.id;
-        // console.log(id);
-        // console.log(decryptedData)
         req.id = id;
         next();
       } else {
@@ -166,7 +164,6 @@ function isAuthorized(roles) {
 
       const { id } = req;
       const user = await userModel.findById(id);
-      console.log(user);
       const { role } = user;
       if (roles.includes(role) == true) {
         next()
@@ -193,7 +190,6 @@ async function forgetPassword(req, res) {
     const user = await userModel.findOne({ email: email });
     // const user = users[0];
     if (user) {
-      // console.log(user);
       const token = user.createToken();
       // db => save
       // db => integrity ,consistency
@@ -232,7 +228,6 @@ async function handleResetRequest(req, res, next) {
 
       req.token = token;
       console.log("220 " + req.token)
-      // console.log("I was inside");
       next();
 
       // token verify 
@@ -294,12 +289,4 @@ module.exports.isUserLoggedIn = isUserLoggedIn;
 module.exports.logout = logout;
 module.exports.handleResetRequest = handleResetRequest;
 
-// login
-// user verify
-// protect Route 
-// authorization
-
-//forgetPassword
-//resetPassword
-//updatepassword
 

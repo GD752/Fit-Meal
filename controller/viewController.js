@@ -9,7 +9,6 @@ async function getPlansListing(req, res) {
   let sp=req.query.sort;
   let mysort=null;
   if(sp){
-    console.log(sp)
     let sp1=sp.split(' ').shift();
     let od=sp.split(" ").pop()
     mysort=[[sp1,od]]
@@ -17,9 +16,8 @@ async function getPlansListing(req, res) {
   const plans= await planModel.find({'name':new RegExp(val,'i')}).sort(mysort);
   res.render("plansListing.pug", {
     title: "Plans page",
-    // 3
     plans: plans,
-    user,val
+    user,val,sp
   })
 }
 
@@ -48,7 +46,6 @@ async function plansListingUpdatable(req, res) {
   let sp=req.query.sort;
   let mysort=null;
   if(sp){
-    console.log(sp)
     let sp1=sp.split(' ').shift();
     let od=sp.split(" ").pop()
     mysort=[[sp1,od]]
@@ -57,7 +54,7 @@ async function plansListingUpdatable(req, res) {
   res.render("updatePlanList.pug", {
     title: "Plans page",
     plans: plans,
-    user,val
+    user,val,sp
   })
 }
 
@@ -74,7 +71,6 @@ async function getUsersListing(req, res) {
 
 async function getLoginPage(req, res) {
   const user = req.user;
-  console.log(req.user);
   res.render("login.pug", {
     title: "Login Page",
     user
@@ -142,7 +138,6 @@ async function getUpdatePlan(req, res) {
   const user=req.user;
   const id=req.params.id;
   const plan =await planModel.findById(id);
-  console.log(plan);
   res.render("updatePlan.pug", {
     title: "Update Plan",
     user,

@@ -2,10 +2,27 @@
     if(plans)
         |Sort_By:
         select(name='sortSelect',id=sbar)
-            option(value=null) None
-            option(value='ratingsAverage desc') Best Rated
-            option(value='netprice ascending') Low Net Price
-            option(value='discount -1') High Discount
+            if(sp)
+                if(sp=='ratingsAverage desc')
+                        option(value=null) None
+                        option(value='ratingsAverage desc' selected) Best Rated
+                        option(value='netprice ascending') Low Net Price
+                        option(value='discount -1') High Discount
+                else if(sp=='netprice ascending')
+                        option(value=null) None
+                        option(value='ratingsAverage desc') Best Rated
+                        option(value='netprice ascending' selected) Low Net Price
+                        option(value='discount -1') High Discount
+                else if(sp=='discount -1')
+                        option(value=null) None
+                        option(value='ratingsAverage desc') Best Rated
+                        option(value='netprice ascending') Low Net Price
+                        option(value='discount -1' selected) High Discount
+            else
+                    option(value=null) None
+                    option(value='ratingsAverage desc') Best Rated
+                    option(value='netprice ascending') Low Net Price
+                    option(value='discount -1') High Discount
     input(type='text', name='search', placeholder='Search',id='sbar', value=val)
     button(type="submit" name='searchbtn').btn.form-button
         i.fa.fa-search(aria-hidden='true')

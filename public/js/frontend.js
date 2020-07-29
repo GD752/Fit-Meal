@@ -115,12 +115,14 @@ async function resetPasswordHelper(password,confirmPassword, resetToken) {
 
 if (signupForm) {
   signupForm.addEventListener("submit", function (e) {
-    // form reload 
     e.preventDefault();
     const email = d.querySelector(".email").value;
     const password = d.querySelector(".password").value
     const confirmPassword = d.querySelector(".confirmPassword").value;
     const name = d.querySelector(".name").value;
+    if(password!=confirmPassword){
+      alert("Password and confirm password are not same");;
+    }
     signupHelper({email, password, confirmPassword, name});
   })
 }

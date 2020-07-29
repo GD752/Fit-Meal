@@ -14,7 +14,6 @@ let delElement=d.querySelectorAll(".delicon")
 let search=d.querySelector('input[name="search"]')
 let addPlan=d.querySelector('.createPlan')
 const paymentBtn = d.querySelector(".payment");
-const bpayment=d.querySelector(".beforePayment")
 
 async function addPlanHelper(data){
   const response=await axios.post("/api/plans/createPlan",data);
@@ -312,6 +311,10 @@ if (paymentBtn) {
   let time=d.querySelector('[name="time"]')
   paymentBtn.addEventListener("click", function (e) {
     e.preventDefault();
+    if(address.value.length<1){
+      alert("Please add relevent address.")
+      return;
+    }
     const planId = paymentBtn.getAttribute("plan-id");
     payementHelper(planId,address,time);
   })

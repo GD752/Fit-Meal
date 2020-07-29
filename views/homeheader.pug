@@ -14,7 +14,7 @@ header
         a.white-anchors(href='/contactUs') CONTACT US
       if user
           li.nav-line
-            a.white-anchors(href='/profilePage') #{user.name}
+            a.white-anchors(href='/profilePage') #{(user.name).split(' ').shift()}
           li.nav-line
             a.white-anchors(href='javascript:;').logout LOGOUT
       else

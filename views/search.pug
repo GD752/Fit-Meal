@@ -3,9 +3,9 @@
         |Sort_By:
         select(name='sortSelect',id=sbar)
             option(value=null) None
-            option(value='netprice descending') High Net Price
+            option(value='ratingsAverage desc') Best Rated
             option(value='netprice ascending') Low Net Price
-            option(value='discount descending') High Discount
+            option(value='discount -1') High Discount
     input(type='text', name='search', placeholder='Search',id='sbar', value=val)
     button(type="submit" name='searchbtn').btn.form-button
         i.fa.fa-search(aria-hidden='true')

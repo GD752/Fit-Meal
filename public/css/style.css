@@ -566,7 +566,7 @@ td{
 .searchbar{
   display: flex;
   height: 7vh;
-  padding-left: 62vw;
+  padding-left: calc(100vw - 560px);
   padding-right: 0.1vw;
   transform: scale(0.9);
 }
@@ -631,7 +631,7 @@ a #text{
   text-align: left;
   display: flex;
   justify-content: flex-start;
-  width: calc(100vw - 700px);
+  width: calc(100vw - 820px);
 }
 .logo{
   width: 8em;

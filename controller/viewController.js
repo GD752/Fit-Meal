@@ -22,7 +22,7 @@ async function getPlansListing(req, res) {
 }
 
 async function getAllBookings(req,res){
-  const bookings=await bookingModel.find().populate("plan").populate("user");
+  const bookings=await bookingModel.find();
   const user = req.user;
   res.render('allBookings',{
     title: 'Booking Details',

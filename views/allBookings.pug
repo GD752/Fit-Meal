@@ -13,8 +13,8 @@ block content
           th Expires in
         for booking in bookings
           tr
-            td #{booking.populate("plan").name}
-            td #{booking.populate("user").name}
+            td #{booking.populate("plan")}
+            td #{booking.populate("user")}
             td #{booking.id}
             td #{String(booking.timeOfDel.getHours()).padStart(2,0)}:#{String(booking.timeOfDel.getMinutes()).padStart(2,0)}
             td #{booking.delAddress}

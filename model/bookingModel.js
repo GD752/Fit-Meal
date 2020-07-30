@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const expiry=Date.now() + 30*24*60*60*1000;
 const bookingSchema = new mongoose.Schema({
   user:{
     type:mongoose.Schema.ObjectId
@@ -22,7 +23,7 @@ const bookingSchema = new mongoose.Schema({
   },
   expires: {
     type: Date,
-    default: Date.now() + 30*24*60*60*1000
+    default: expiry
   }
 })
 

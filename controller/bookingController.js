@@ -61,7 +61,7 @@ const createNewBooking = async function (userEmail, planId,data) {
       bookedPlan.expires=exp;
       bookedPlan.delAddress=data.address;
       bookedPlan.time=data.time;
-      const bsave=await bookedPlan.save({
+      await bookedPlan.save({
         validateBeforeSave: false
       })
       // const newbooking = await bookingModel.findByIdAndUpdate(bookedPlan["_id"], {
@@ -85,7 +85,7 @@ const createNewBooking = async function (userEmail, planId,data) {
     }
   }
   catch(err){
-    return err.message
+    console.log("Trapped:"+err.message)
   }
 }
 

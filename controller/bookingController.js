@@ -57,6 +57,7 @@ const createNewBooking = async function (userEmail, planId,data) {
     if (bookedPlan) {
       if(bookedPlan.status=='Active'){
         bookedPlan.expSetter(bookedPlan['expires']);
+        console.log(bookedPlan['expires'])
       }
       else{
         bookedPlan.expSetter(new Date());

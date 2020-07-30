@@ -58,11 +58,9 @@ const createNewBooking = async function (userEmail, planId,data) {
   const bookedPlan= await bookingModel.findOne({user: userId, plan: planId})
   if (bookedPlan) {
     console.log(bookedPlan.expires)
-    const exp=(bookedPlan.expires +30*24*60*60*1000);
     bookedPlan.delAddress= data.address
     bookedPlan.time= data.time
-    bookedPlan.expires= exp
-    console.log(exp)
+    bookedPlan.expires.setTime(bookedPlan.expires.getTime()+30*24*60*60*1000)
     console.log(bookedPlan.expires)
     await bookedPlan.save({
       validateBeforeSave: false

@@ -40,7 +40,10 @@ bookingSchema.virtual('status')
     return "Expired"
   else return "Active"
 })
-
+bookingSchema.pre('save',function preSave(next){
+  var bplan=this;
+  bplan.expires.setTime(bplan.expires.getTime()+30*24*60*60*1000)
+})
 bookingSchema.methods.expSetter=function(date){
     console.log("I am here")
     this.expires.setTime(date.getTime()+30*24*60*60*1000)

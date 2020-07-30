@@ -6,18 +6,18 @@ block content
       table
         tr
           th Plan
-          th User ID
           th Booking ID
           th Time of Delivery
           th Delivery Address
-          th Expires in
+          th Expires on
+          th Status
         for booking in bookings
           tr
-            td #{booking.plan}
-            td #{booking.user}
+            td #{booking.plan.name}
             td #{booking.id}
-            td #{booking.timeOfDel.getHours()}:#{booking.timeOfDel.getMinutes()}
+            td #{String(booking.timeOfDel.getHours()).padStart(2,0)}:#{String(booking.timeOfDel.getMinutes()).padStart(2,0)}
             td #{booking.delAddress}
-            td #{booking.expires}
+            td #{booking.expires.toDateString()}
+            td #{booking.status}
   else
     h3 Sorry no resuls found !

@@ -49,38 +49,41 @@ async function createSession(req, res) {
 }
 
 const createNewBooking = async function (userEmail, planId,data) {
-  const user = await userModel.findOne({ email: userEmail });
-  const plan = await planModel.findById(planId);
-  console.log("In create new bookings")
-  console.log(user);
-  
-  const userId = user["_id"];
-  const bookedPlan= await bookingModel.findOne({user: userId, plan: planId})
-  if (bookedPlan) {
-    console.log(bookedPlan.expires)
-    bookedPlan.delAddress= data.address
-    bookedPlan.time= data.time
-    bookedPlan.expires.setTime(bookedPlan.expires.getTime()+30*24*60*60*1000)
-    console.log(bookedPlan.expires)
-    await bookedPlan.save({
-      validateBeforeSave: false
-    })
-    console.log(bookedPlan.expires)
+  try{
+    const user = await userModel.findOne({ email: userEmail });
+    const plan = await planModel.findById(planId);
+    const userId = user["_id"];
+    const bookedPlan= await bookingModel.findOne({user: userId, plan: planId})
+    if (bookedPlan) {
+      console.log(bookedPlan.expires)
+      bookedPlan.delAddress= data.address
+      bookedPlan.time= data.time
+      if(bookedPlan.status=="Active")
+        bookedPlan.expires.setTime(bookedPlan.expires.getTime()+30*24*60*60*1000)
+      console.log(bookedPlan.expires)
+      await bookedPlan.save({
+        validateBeforeSave: false
+      })
+      console.log(bookedPlan.expires)
+    }
+    else {
+      console.log("In create new bookings else")
+      const order = {
+          user: userId,
+          delAddress: data.address,
+          time: data.time,
+          plan: planId,
+        }
+      const newOrder = await bookingModel.create(order);
+      if(user.bookings==undefined)
+        user.bookings=[(newOrder["_id"])];
+      else
+        user.bookings.push(newOrder["_id"])
+      await user.save({ validateBeforeSave: false });
+    }
   }
-  else {
-    console.log("In create new bookings else")
-    const order = {
-        user: userId,
-        delAddress: data.address,
-        time: data.time,
-        plan: planId,
-      }
-    const newOrder = await bookingModel.create(order);
-    if(user.bookings==undefined)
-      user.bookings=[(newOrder["_id"])];
-    else
-      user.bookings.push(newOrder["_id"])
-    await user.save({ validateBeforeSave: false });
+  catch(err){
+    return err.message
   }
 }
 

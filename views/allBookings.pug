@@ -5,7 +5,7 @@ block content
     .signup-parent
       table
         tr
-          th Plan
+          th Plan ID
           th User ID
           th Booking ID
           th Time of Delivery
@@ -13,11 +13,11 @@ block content
           th Expires in
         for booking in bookings
           tr
-            td #{booking.plan}
-            td #{booking.user}
+            td #{booking.populate("plan").name}
+            td #{booking.populate("user").name}
             td #{booking.id}
-            td #{booking.timeOfDel.getHours()}:#{booking.timeOfDel.getMinutes()}
+            td #{String(booking.timeOfDel.getHours()).padStart(2,0)}:#{String(booking.timeOfDel.getMinutes()).padStart(2,0)}
             td #{booking.delAddress}
-            td #{booking.expires}
+            td #{booking.expires.toDateString()}
   else
     h3 Sorry no resuls found !

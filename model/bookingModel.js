@@ -34,5 +34,12 @@ bookingSchema.virtual('time')
   let tarr=ntime.split(':');
   this.timeOfDel=new Date(2020,0,1,tarr[0],tarr[1],tarr[2]);
 })
+
+bookingSchema.virtual('status')
+.get(function(){
+  if(Date.now()>this.expires)
+    return "Expired"
+  else return "Active"
+})
 const bookingModel = mongoose.model("bookingmodels", bookingSchema);
 module.exports = bookingModel;

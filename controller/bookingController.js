@@ -61,36 +61,32 @@ const createNewBooking = async function (userEmail, planId,data) {
     console.log("In create new bookings if")
     const order = {
       user: userId,
-      bookedPlans: [
-        {
           delAddress: data.address,
           // time: data.time,
           plan: planId,
           currentPrice: plan.netprice
-        }
-      ]
-    }
+      }
     // create a new users booking
     const newOrder = await bookingModel.create(order);
     // user update
     user.bookings.push(newOrder["_id"]);
     await user.save({ validateBeforeSave: false }); 
   }
-  else {
-    const newPlan = {
-      delAddress: data.address,
-      time: data.time,
-      plan: planId,
-      currentPrice: plan.netprice
-    }
-    const booking = await bookingModel.findById(user.bookings);
-    booking.bookedPlans.push(newPlan);
-    const newBookedPlans = booking.bookedPlans;
-    const newbooking = await bookingModel.findByIdAndUpdate(booking["_id"], {
-      bookedPlans: newBookedPlans
-    }, { new: true });
+  // else {
+  //   const newPlan = {
+  //     delAddress: data.address,
+  //     time: data.time,
+  //     plan: planId,
+  //     currentPrice: plan.netprice
+  //   }
+  //   const booking = await bookingModel.findById(user.bookings);
+  //   booking.bookedPlans.push(newPlan);
+  //   const newBookedPlans = booking.bookedPlans;
+  //   const newbooking = await bookingModel.findByIdAndUpdate(booking["_id"], {
+  //     bookedPlans: newBookedPlans
+  //   }, { new: true });
    
-  }
+  // }
   // 2. previous user
   // user => search 
 }

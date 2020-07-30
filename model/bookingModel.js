@@ -4,7 +4,10 @@ let dateT=new Date();
 dateT.setDate(dateT.getDate+1);
 dateT.setHours(9);
 dateT.setMinutes(0)
-const bookedPlanSchema = new mongoose.Schema({
+const bookingSchema = new mongoose.Schema({
+  user:{
+    type:String
+  },
   bookedAt: {
     type: Date,
     default: dateNow
@@ -31,18 +34,7 @@ const bookedPlanSchema = new mongoose.Schema({
   }
 })
 
-const bookingSchema = new mongoose.Schema({
-  user: {
-      type: String,
-      required: true
-  },
-  bookedPlans: {
-      type: [bookedPlanSchema],
-      required: true
-  }
-})
-
-bookedPlanSchema.virtual('time')
+bookingSchema.virtual('time')
 .get(function(){
   return this.timeOfDel.getTime();
 })

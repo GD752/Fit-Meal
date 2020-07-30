@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const bookingSchema = new mongoose.Schema({
   user:{
-    type:String
+    type:mongoose.Schema.ObjectId
   },
   bookedAt: {
     type: Date,
@@ -35,7 +35,7 @@ bookingSchema.virtual('time')
 })
 .set(function(ntime){
   let tarr=ntime.split(':');
-  this.set('timeOfDel', new Date(2020,0,1,tarr[0],tarr[1],tarr[2]));
+  this.timeOfDel=new Date(2020,0,1,tarr[0],tarr[1],tarr[2]);
 })
 const bookingModel = mongoose.model("bookingmodels", bookingSchema);
 module.exports = bookingModel;

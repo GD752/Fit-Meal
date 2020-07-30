@@ -35,7 +35,8 @@ const userSchema = new mongoose.Schema({
     default: "/img/users/default.jpeg"
   },
   bookings:{
-    type: String
+    type: [mongoose.Schema.ObjectId],
+    ref: 'bookingmodels'
   }
 })
 

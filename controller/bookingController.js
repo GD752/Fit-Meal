@@ -55,40 +55,31 @@ const createNewBooking = async function (userEmail, planId,data) {
   console.log(user);
   
   const userId = user["_id"];
-
-  if (user.bookings == undefined) {
-    // 1 first time user
-    console.log("In create new bookings if")
+  const bookedPlan= await bookingModel.findOne({user: userId, plan: planId})
+  if (bookedPlan) {
+    const exp=bookedPlan.expires + 30*24*60*60*1000;
+    bookedPlan.delAddress= data.address
+    bookedPlan.time= data.time
+    bookedPlan.expires= exp
+    await bookedPlan.save({
+      validateBeforeSave: false
+    })
+  }
+  else {
+    console.log("In create new bookings else")
     const order = {
         user: userId,
         delAddress: data.address,
         time: data.time,
         plan: planId,
-        currentPrice: plan.netprice
       }
-    // create a new users booking
     const newOrder = await bookingModel.create(order);
-    // user update
-    user.bookings=[(newOrder["_id"])];
-    await user.save({ validateBeforeSave: false }); 
+    if(user.bookings==undefined)
+      user.bookings=[(newOrder["_id"])];
+    else
+      user.bookings.push(newOrder["_id"])
+    await user.save({ validateBeforeSave: false });
   }
-  else {
-    const newPlan = {
-      delAddress: data.address,
-      time: data.time,
-      plan: planId,
-      currentPrice: plan.netprice
-    }
-    const booking = await bookingModel.findById(user.bookings);
-    booking.bookedPlans.push(newPlan);
-    const newBookedPlans = booking.bookedPlans;
-    const newbooking = await bookingModel.findByIdAndUpdate(booking["_id"], {
-      bookedPlans: newBookedPlans
-    }, { new: true });
-   
-  }
-  // 2. previous user
-  // user => search 
 }
 
 module.exports.createBooking = async function (request, response) {

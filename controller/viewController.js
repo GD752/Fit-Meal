@@ -44,6 +44,7 @@ async function getMyBookings(req,res){
 async function plansListingUpdatable(req, res) {
   let val=req.query.name;
   let sp=req.query.sort;
+  const user =req.user;
   let mysort=null;
   if(sp){
     let sp1=sp.split(' ').shift();

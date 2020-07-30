@@ -40,9 +40,6 @@ const userSchema = new mongoose.Schema({
   }
 })
 
-userSchema.pre("save", function () {
-  this.confirmPassword = undefined;
-})
 userSchema.methods.createToken = function () {
   const token = crypto.randomBytes(32).toString("hex");
   // user

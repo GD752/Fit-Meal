@@ -21,8 +21,7 @@ const bookingSchema = new mongoose.Schema({
     required: [true, "Booking must be of a plan"]
   },
   expires: {
-    type: Date,
-    default: new Date()+30*24*60*60*1000
+    type: Date
   }
 })
 
@@ -41,5 +40,9 @@ bookingSchema.virtual('status')
     return "Expired"
   else return "Active"
 })
+
+bookingModel.methods.expSetter=function(date){
+    this.expires.setTime(date.getTime()+30*24*60*60*1000)
+}
 const bookingModel = mongoose.model("bookingmodels", bookingSchema);
 module.exports = bookingModel;

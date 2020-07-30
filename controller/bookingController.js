@@ -55,10 +55,11 @@ const createNewBooking = async function (userEmail, planId,data) {
     const userId = user["_id"];
     const bookedPlan= await bookingModel.findOne({user: userId, plan: planId})
     if (bookedPlan) {
-      const exp=new Date();
       if(bookedPlan.status=='Active'){
-        exp.setTime(bookedPlan.expires.getTime()+30*24*60*60*1000)
-        bookedPlan['expires']=exp;
+        bookedPlan.expSetter(bookedPlan['expires']);
+      }
+      else{
+        bookedPlan.expSetter(new Date());
       }
       bookedPlan.delAddress=data.address;
       bookedPlan.time=data.time;

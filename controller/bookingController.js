@@ -3,6 +3,7 @@ const stripe = require("stripe")(SK);
 const planModel = require("../model/planModel");
 const userModel = require("../model/userModel");
 let bookingModel = require("../model/bookingModel");
+const WKEY=process.env.WKEY||require("../configs/config").WKEY;
 async function createSession(req, res) {
   console.log("In session")
   // retrive your plan and user
@@ -45,4 +46,76 @@ async function createSession(req, res) {
     })
   }
 }
+
+const createNewBooking = async function (userEmail, planId,data) {
+  const user = await userModel.findOne({ email: userEmail });
+  const plan = await planModel.findById(planId);
+  console.log(user);
+  
+  const userId = user["_id"];
+
+  if (user.bookings == undefined) {
+    // 1 first time user
+    const order = {
+      user: userId,
+      plan: plan.id,
+      delAddress: data.address,
+      time: data.time
+      // bookedPlans: [
+      //   {
+      //     planId: planId,
+      //     name: plan.name,
+      //     currentPrice: plan.price
+
+      //   }
+      // ]
+    }
+    // create a new users booking
+    const newOrder = await bookingModel.create(order);
+    // user update
+    user.bookings = newOrder["_id"];
+    await user.save({ validateBeforeSave: false }); 
+  }
+  // else {
+  //   const newPlan = {
+  //     planId: planId,
+  //     name: plan.name,
+  //     currentPrice: plan.price
+  //   }
+  //   const booking = await bookingModel.findById(user.userBookedPlansId);
+  //   booking.bookedPlans.push(newPlan);
+  //   const newBookedPlans = booking.bookedPlans;
+  //   const newbooking = await bookingModel.findByIdAndUpdate(booking["_id"], {
+  //     bookedPlans: newBookedPlans
+  //   }, { new: true });
+   
+  // }
+  // 2. previous user
+  // user => search 
+}
+
+module.exports.createBooking = async function (request, response) {
+  const sig = request.headers['stripe-signature'];
+  let event;
+  const endpointSecret = WKEY;
+  try {
+    event = stripe.webhooks.constructEvent(request.body, sig, endpointSecret);
+    // console.log(event);
+  }
+  catch (err) {
+  return  response.status(400).send(`Webhook Error: ${err.message}`);
+  }
+  
+  if(event.type=="checkout.session.completed"){
+    const userEmail = event.data.object.customer_email;
+  //  => session
+    console.log(event.data.object);
+    const planId = event.data.object.client_reference_id;
+    const data=event.data.object.metadata;
+    await createNewBooking(userEmail, planId, data);
+    // payment complete
+  }
+  response.json({ received: true });
+}
+
 module.exports.createSession = createSession;

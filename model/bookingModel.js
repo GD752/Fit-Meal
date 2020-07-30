@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 let dateNow= new Date();
 let dateT=new Date();
 dateT.setDate(dateT.getDate+1);
-dateT.setHours(12);
+dateT.setHours(9);
 dateT.setMinutes(0)
 const bookingSchema = new mongoose.Schema({
   bookedAt: {
@@ -32,6 +32,13 @@ const bookingSchema = new mongoose.Schema({
     default: +dateNow + 30*24*60*60*1000
   }
 })
-
+planSchema.virtual('time')
+.get(function(){
+  return this.timeOfDel.getTime();
+})
+.set(function(ntime){
+  let tarr=ntime.split(':');
+  this.set('timeOfDel', new Date(2020,0,1,tarr[0],tarr[1],tarr[2]));
+})
 const bookingModel = mongoose.model("bookingmodels", bookingSchema);
 module.exports = bookingModel;

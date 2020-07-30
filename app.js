@@ -7,6 +7,8 @@ const viewRouter = require("./router/viewRouter");
 const reviewRouter = require("./router/reviewRouter");
 const bookingRouter = require("./router/bookingRouter");
 
+app.post("/webhook-checkout",bodyParser.raw({ type: 'application/json' }), bookingController.createBooking);
+
 process.env.NODE_ENV=process.env.NODE_ENV||"dev";
 app.use(cookieParser());
 app.use(express.json());

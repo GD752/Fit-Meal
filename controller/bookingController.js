@@ -51,6 +51,7 @@ async function createSession(req, res) {
 const createNewBooking = async function (userEmail, planId,data) {
   const user = await userModel.findOne({ email: userEmail });
   const plan = await planModel.findById(planId);
+  console.log("In create new bookings")
   console.log(user);
   
   const userId = user["_id"];
@@ -59,38 +60,36 @@ const createNewBooking = async function (userEmail, planId,data) {
     // 1 first time user
     const order = {
       user: userId,
-      plan: plan.id,
-      delAddress: data.address,
-      time: data.time
-      // bookedPlans: [
-      //   {
-      //     planId: planId,
-      //     name: plan.name,
-      //     currentPrice: plan.price
-
-      //   }
-      // ]
+      bookedPlans: [
+        {
+          delAddress: data.address,
+          time: data.time,
+          plan: planId,
+          currentPrice: plan.netprice
+        }
+      ]
     }
     // create a new users booking
     const newOrder = await bookingModel.create(order);
     // user update
-    user.bookings = newOrder["_id"];
+    user.bookings.push(newOrder["_id"]);
     await user.save({ validateBeforeSave: false }); 
   }
-  // else {
-  //   const newPlan = {
-  //     planId: planId,
-  //     name: plan.name,
-  //     currentPrice: plan.price
-  //   }
-  //   const booking = await bookingModel.findById(user.userBookedPlansId);
-  //   booking.bookedPlans.push(newPlan);
-  //   const newBookedPlans = booking.bookedPlans;
-  //   const newbooking = await bookingModel.findByIdAndUpdate(booking["_id"], {
-  //     bookedPlans: newBookedPlans
-  //   }, { new: true });
+  else {
+    const newPlan = {
+      delAddress: data.address,
+      time: data.time,
+      plan: planId,
+      currentPrice: plan.netprice
+    }
+    const booking = await bookingModel.findById(user.bookings);
+    booking.bookedPlans.push(newPlan);
+    const newBookedPlans = booking.bookedPlans;
+    const newbooking = await bookingModel.findByIdAndUpdate(booking["_id"], {
+      bookedPlans: newBookedPlans
+    }, { new: true });
    
-  // }
+  }
   // 2. previous user
   // user => search 
 }
@@ -113,6 +112,7 @@ module.exports.createBooking = async function (request, response) {
     console.log(event.data.object);
     const planId = event.data.object.client_reference_id;
     const data=event.data.object.metadata;
+    console.log(data)
     await createNewBooking(userEmail, planId, data);
     // payment complete
   }

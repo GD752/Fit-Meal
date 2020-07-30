@@ -16,10 +16,10 @@ block content
           input(type='email', name='email1', value=`${user1.email}`)
         .entry
           .entry-text Role
-          select(name='role1', value=`${user1.role}`)
-            option(value='admin') Admin
-            option(value='user') User
-            option(value='restaurant owner') Restaurent Owner
-            option(value='delivery boy') Delivery Boy
+          select(name='role1')
+            option(value='admin',selected=(user1.role=='admin')) Admin
+            option(value='user',selected=(user1.role=='user')) User
+            option(value='restaurant owner',selected=(user1.role=='restaurent owner')) Restaurent Owner
+            option(value='delivery boy',selected=(user1.role=='delivery boy')) Delivery Boy
         .btn-parent
           button.btn.btn-primary(type='submit') Update User

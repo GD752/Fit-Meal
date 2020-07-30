@@ -64,9 +64,7 @@ const createNewBooking = async function (userEmail, planId,data) {
       }
       bookedPlan.delAddress=data.address;
       bookedPlan.time=data.time;
-      await bookedPlan.save({
-        validateBeforeSave: false
-      })
+      await bookedPlan.save()
       console.log(bookedPlan.expires)
       // const newbooking = await bookingModel.findByIdAndUpdate(bookedPlan["_id"], {
       //   expires:exp,delAddress:data.address,time:data.time

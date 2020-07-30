@@ -1,20 +1,15 @@
 const mongoose = require("mongoose");
-let dateNow= new Date();
-let dateT=new Date();
-dateT.setDate(dateT.getDate+1);
-dateT.setHours(9);
-dateT.setMinutes(0)
 const bookingSchema = new mongoose.Schema({
   user:{
     type:String
   },
   bookedAt: {
     type: Date,
-    default: dateNow
+    default:new Date()
   },
   timeOfDel: {
       type: Date,
-      default: dateT
+      default: new Date(2020,0,1,9,0,0)
   },
   delAddress:{
     type: String,

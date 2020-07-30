@@ -41,7 +41,7 @@ bookingSchema.virtual('status')
   else return "Active"
 })
 
-bookingModel.methods.expSetter=function(date){
+bookingSchema.methods.expSetter=function(date){
     this.expires.setTime(date.getTime()+30*24*60*60*1000)
 }
 const bookingModel = mongoose.model("bookingmodels", bookingSchema);

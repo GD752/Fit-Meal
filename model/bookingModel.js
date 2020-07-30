@@ -21,7 +21,8 @@ const bookingSchema = new mongoose.Schema({
     required: [true, "Booking must be of a plan"]
   },
   expires: {
-    type: Date
+    type: Date,
+    default: new Date(Date.now()+30*24*60*60*1000)
   }
 })
 

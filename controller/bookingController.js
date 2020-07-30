@@ -58,6 +58,7 @@ const createNewBooking = async function (userEmail, planId,data) {
 
   if (user.bookings == undefined) {
     // 1 first time user
+    console.log("In create new bookings if")
     const order = {
       user: userId,
       bookedPlans: [

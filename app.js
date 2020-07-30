@@ -1,4 +1,5 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 const app = express();
 const cookieParser = require("cookie-parser");
 const planRouter = require("./router/planRouter");
@@ -6,6 +7,7 @@ const userRouter = require("./router/userRouter");
 const viewRouter = require("./router/viewRouter");
 const reviewRouter = require("./router/reviewRouter");
 const bookingRouter = require("./router/bookingRouter");
+const bookingController = require("./controller/bookingController");
 
 app.post("/webhook-checkout",bodyParser.raw({ type: 'application/json' }), bookingController.createBooking);
 

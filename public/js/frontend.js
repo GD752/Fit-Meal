@@ -310,15 +310,15 @@ async function payementHelper(planId,add,time) {
 }
 
 if (paymentBtn) {
-  let address=d.querySelector('[name="address"]')
-  let time=d.querySelector('[name="time"]')
   paymentBtn.addEventListener("click", function (e) {
     e.preventDefault();
-    if(address.value.length<1){
+    let address=d.querySelector('[name=address]').value;
+    let time=d.querySelector('[name=time]').value;
+    const planId = paymentBtn.getAttribute("plan-id");
+    if(address.length<10){
       alert("Please add relevent address.")
       return;
     }
-    const planId = paymentBtn.getAttribute("plan-id");
     payementHelper(planId,address,time);
   })
 }

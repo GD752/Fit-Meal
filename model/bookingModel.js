@@ -32,7 +32,7 @@ const bookingSchema = new mongoose.Schema({
     default: +dateNow + 30*24*60*60*1000
   }
 })
-planSchema.virtual('time')
+bookingSchema.virtual('time')
 .get(function(){
   return this.timeOfDel.getTime();
 })

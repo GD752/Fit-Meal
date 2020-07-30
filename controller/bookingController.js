@@ -12,6 +12,7 @@ async function createSession(req, res) {
     let { id } = req
     let userId = id;
     let { planId,add,time } = req.body;
+    console.log(add)
     const user = await userModel.findById(userId);
     const plan = await planModel.findById(planId);
     console.log(user)
@@ -21,7 +22,7 @@ async function createSession(req, res) {
       payment_method_types: ['card'],
       customer_email: user.email,
       client_reference_id: planId,
-      metadata: {address:add,time:time},
+      metadata: {'address': add,'time': time},
       line_items: [
         {
           name: plan.name,

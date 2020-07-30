@@ -58,12 +58,17 @@ const createNewBooking = async function (userEmail, planId,data) {
       console.log("Booked Plan exists")
       const exp=new Date();
       exp.setTime(bookedPlan.expires().getTime()+30*24*60*60*1000)
+      console.log(exp)
+      console.log(bookedPlan.expires)
+      console.log(bookedPlan["expires"])
       bookedPlan['expires']=exp;
+      console.log(bookedPlan["expires"])
       bookedPlan.delAddress=data.address;
       bookedPlan.time=data.time;
       await bookedPlan.save({
         validateBeforeSave: false
       })
+      console.log(bookedPlan.expires)
       // const newbooking = await bookingModel.findByIdAndUpdate(bookedPlan["_id"], {
       //   expires:exp,delAddress:data.address,time:data.time
       // }, { new: true });

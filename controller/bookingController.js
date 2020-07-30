@@ -69,7 +69,7 @@ const createNewBooking = async function (userEmail, planId,data) {
     // create a new users booking
     const newOrder = await bookingModel.create(order);
     // user update
-    user.bookings.push(newOrder["_id"]);
+    user.bookings=[(newOrder["_id"])];
     await user.save({ validateBeforeSave: false }); 
   }
   // else {

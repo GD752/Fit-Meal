@@ -58,11 +58,8 @@ const createNewBooking = async function (userEmail, planId,data) {
       const exp=new Date();
       if(bookedPlan.status=='Active'){
         exp.setTime(bookedPlan.expires.getTime()+30*24*60*60*1000)
+        bookedPlan['expires']=exp;
       }
-      else{
-        exp.setTime((Date.now())+30*24*60*60*1000)
-      }
-      bookedPlan['expires']=exp;
       bookedPlan.delAddress=data.address;
       bookedPlan.time=data.time;
       await bookedPlan.save({

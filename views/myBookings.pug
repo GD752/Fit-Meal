@@ -3,7 +3,7 @@ block content
   h2 MY BOOKINGS
   if(bookings.length!=0)
     .signup-parent
-      table
+      table.bookings
         tr
           th Plan
           th Booking ID
@@ -18,6 +18,6 @@ block content
             td #{String(booking.timeOfDel.getHours()).padStart(2,0)}:#{String(booking.timeOfDel.getMinutes()).padStart(2,0)}
             td #{booking.delAddress}
             td #{booking.expires.toDateString()}
-            td #{booking.status}
+            td(id=`b${booking.status}`) #{booking.status}
   else
     h3 Sorry no resuls found !

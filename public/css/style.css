@@ -542,8 +542,8 @@ table:hover{
   background-color: var(--bg1-color);
   transition: background-color 0.3s;
 }
-td{
-  padding: 1rem 1rem 1rem 1rem;
+td, th{
+  padding: 0.8rem 0.8rem 0.8rem 0.8rem;
   border: 1px solid var(--secondary-color);
   vertical-align: middle;
 }
@@ -715,4 +715,17 @@ a #text{
   padding: 0.3rem;
   height: 100%;
   margin-right: 1vh;
+}
+.bookings{
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+#bActive{
+  background-color: rgb(164, 243, 181);
+  color: rgb(11, 238, 22);
+}
+#bExpired{
+  background-color: rgb(243, 176, 164);
+  color: rgb(238, 37, 11);
 }

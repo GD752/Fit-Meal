@@ -64,7 +64,7 @@ const createNewBooking = async function (userEmail, planId,data) {
       bookedPlans: [
         {
           delAddress: data.address,
-          time: data.time,
+          // time: data.time,
           plan: planId,
           currentPrice: plan.netprice
         }

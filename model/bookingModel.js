@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
 const bookingSchema = new mongoose.Schema({
   user:{
-    type:mongoose.Schema.ObjectId
+    type:mongoose.Schema.ObjectId,
+    ref: "usermodels",
+    required:[true,"Booking must be done by user"]
   },
   bookedAt: {
     type: Date,

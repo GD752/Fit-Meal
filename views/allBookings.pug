@@ -5,16 +5,16 @@ block content
     .signup-parent
       table.bookings
         tr
-          th Plan ID
-          th User ID
+          th Plan 
+          th User 
           th Booking ID
           th Time of Delivery
           th Delivery Address
           th Expires on
         for booking in bookings
           tr
-            td #{booking.plan}
-            td #{booking.user}
+            td #{booking.plan.name}
+            td #{booking.user.name}
             td #{booking.id}
             td #{String(booking.timeOfDel.getHours()).padStart(2,0)}:#{String(booking.timeOfDel.getMinutes()).padStart(2,0)}
             td #{booking.delAddress}

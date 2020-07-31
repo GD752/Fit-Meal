@@ -17,7 +17,7 @@ block content
             td #{booking.id}
             td #{String(booking.timeOfDel.getHours()).padStart(2,0)}:#{String(booking.timeOfDel.getMinutes()).padStart(2,0)}
             td #{booking.delAddress}
-            td #{booking.expires.toDateString()}
+            td #{booking.exp.toDateString()}
             td(id=`b${booking.status}`) #{booking.status}
   else
     h3 Sorry no resuls found !

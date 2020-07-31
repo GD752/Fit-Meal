@@ -56,16 +56,13 @@ const createNewBooking = async function (userEmail, planId,data) {
     const bookedPlan= await bookingModel.findOne({user: userId, plan: planId})
     if (bookedPlan) {
       if(bookedPlan.status=='Active'){
-        bookedPlan.expires=bookedPlan.expires.setTime(bookedPlan.expires.getTime()+30*24*60*60*1000)
-        console.log(bookedPlan['expires'])
+        bookedPlan.exp=bookedPlan.exp.setTime(bookedPlan.exp.getTime()+30*24*60*60*1000)
+        console.log(bookedPlan['exp'])
       }
       bookedPlan.delAddress=data.address;
       bookedPlan.time=data.time;
       await bookedPlan.save()
-      console.log(bookedPlan.expires)
-      // const newbooking = await bookingModel.findByIdAndUpdate(bookedPlan["_id"], {
-      //   expires:exp,delAddress:data.address,time:data.time
-      // }, { new: true });
+      console.log(bookedPlan.exp)
     }
     else {
       console.log("In create new bookings else")
@@ -80,7 +77,7 @@ const createNewBooking = async function (userEmail, planId,data) {
         user.bookings=[(newOrder["_id"])];
       else
         user.bookings.push(newOrder["_id"])
-      await user.save({ validateBeforeSave: false });
+      await user.save();
     }
   }
   catch(err){

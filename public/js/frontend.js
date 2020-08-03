@@ -97,7 +97,7 @@ async function logoutHelper() {
 async function forgetPasswordHelper(email) {
   const response = await axios.patch("/api/users/forgetPassword", { email });
   if (response.data.status) {
-    alert("Email Send to user");
+    alert("Email Sent to user");
   }
 }
 async function resetPasswordHelper(password,confirmPassword, resetToken) {

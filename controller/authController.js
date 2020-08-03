@@ -206,7 +206,7 @@ async function forgetPassword(req, res) {
       await Email(emailOptions);
       res.status(200).json({
         resetPasswordLink,
-        status: `Email send to ${email}`
+        status: `Email sent to ${email}`
       })
     } else {
       throw new Error("User does not exist");

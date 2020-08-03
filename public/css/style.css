@@ -52,7 +52,7 @@ li {
 header{
   background-image: linear-gradient(rgba(0, 0, 0, 0.603), rgba(0, 0, 0, 0.849)),
     url(../img/foodimage.jpg);
-  height: 100vh;
+  height: 45rem;
   background-size: 100%;
   background-attachment: fixed;
 }
@@ -169,8 +169,11 @@ h2::after {
   color: #f63854;
   display: block;
   border-bottom: solid;
-  margin: 2rem 31rem;
+  margin: 2rem;
   margin-bottom: 3rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
 }
 h3 {
   font-size: 125%;
@@ -440,8 +443,8 @@ footer {
   font-size: 110%;
 }
 .profileimg{
-  height:28vh;
-  width: 16vw;
+  height: 12.9rem;
+  width: 12.9rem;
   border-radius: 8rem;
 }
 
@@ -566,7 +569,7 @@ td, th{
 }
 .searchbar{
   display: flex;
-  height: 7vh;
+  height: 3.2rem;
   padding-left: calc(100vw - 560px);
   padding-right: 0.1vw;
   transform: scale(0.9);

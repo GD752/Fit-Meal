@@ -50,6 +50,9 @@ const planSchema = new mongoose.Schema({
 })
 planSchema.virtual('price').get(function(){
   return this.netprice+this.discount;
+})
+.set(function (pr) {
+  this.netprice=pr-this.discount;
 });
 const planModel = mongoose.model("planmodels", planSchema);
 module.exports = planModel;

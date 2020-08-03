@@ -39,7 +39,7 @@ bookingSchema.virtual('time')
 
 bookingSchema.virtual('status')
 .get(function(){
-  if(Date.now()>this.expires)
+  if(new Date().getTime()>this.exp.getTime())
     return "Expired"
   else return "Active"
 })

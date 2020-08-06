@@ -60,6 +60,9 @@ const createNewBooking = async function (userEmail, planId,data) {
         bookedPlan.exp=new Date(bookedPlan.exp.getTime()+30*24*60*60*1000)
         console.log(bookedPlan['exp'])
       }
+      else{
+        bookedPlan.exp=new Date(Date.now()+30*24*60*60*1000)
+      }
       bookedPlan.delAddress=data.address;
       bookedPlan.time=data.time;
       await bookedPlan.save()

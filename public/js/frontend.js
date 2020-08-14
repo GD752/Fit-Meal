@@ -55,11 +55,19 @@ async function loginHelper(email, password) {
 if(search){
   const sbtn=d.querySelector('button[name="searchbtn"]');
   let loc=location.href.split('?').shift();
+  let val=search.value;
   const sortby= d.querySelector('[name="sortSelect"]')
+  if(sortby){
+    sortby.addEventListener("change",function(e){
+      val=search.value;
+      if(sortby.value!='None')
+        location.replace(`${loc}?name=${val}&sort=${sortby.value}`)
+    })
+  }
   sbtn.addEventListener("click",function(e){
-    let val=search.value;
     e.preventDefault();
-    if(sortby){
+    val=search.value;
+    if(sortby.value!='None'){
         location.replace(`${loc}?name=${val}&sort=${sortby.value}`)
     }
     else

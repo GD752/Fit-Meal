@@ -60,18 +60,17 @@ if(search){
   if(sortby){
     sortby.addEventListener("change",function(e){
       val=search.value;
-      if(sortby.value!='None')
-        location.replace(`${loc}?name=${val}&sort=${sortby.value}`)
+      if(sortby.value=='None')
+        sortby.value=null;
+      location.replace(`${loc}?name=${val}&sort=${sortby.value}`)
     })
   }
   sbtn.addEventListener("click",function(e){
     e.preventDefault();
     val=search.value;
-    if(sortby.value!='None'){
-        location.replace(`${loc}?name=${val}&sort=${sortby.value}`)
-    }
-    else
-      location.replace(`${loc}?name=${val}`)
+    if(sortby.value=='None')
+      sortby.value=null;
+    location.replace(`${loc}?name=${val}&sort=${sortby.value}`)
   })
 }
 
